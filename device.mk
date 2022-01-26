@@ -14,8 +14,5 @@
 # limitations under the License.
 #
 
-PRODUCT_COPY_FILES += \
-	device/google/gs-common/default-talkback-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-talkback-permissions.xml
-
 PRODUCT_SOONG_NAMESPACES += \
 	device/google/gs-common/powerstats
