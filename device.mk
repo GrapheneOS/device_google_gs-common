@@ -16,3 +16,7 @@
 
 PRODUCT_SOONG_NAMESPACES += \
 	device/google/gs-common/powerstats
+
+# Disable OMX
+PRODUCT_PROPERTY_OVERRIDES += \
+	vendor.media.omx=0
