@@ -33,7 +33,7 @@ class AocStateResidencyDataProvider : public PowerStats::IStateResidencyDataProv
         std::unordered_map<std::string, std::vector<StateResidency>> *residencies) override;
     std::unordered_map<std::string, std::vector<State>> getInfo() override;
 
-  private:
+  protected:
     std::unordered_map<std::string /* entity name */,
         std::vector<std::unique_ptr<GenericStateResidencyDataProvider>> /* providers */> mProviders;
 };
