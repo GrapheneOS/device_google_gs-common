@@ -18,6 +18,8 @@
 
 #include <android-base/logging.h>
 
+#include <aoc.h>
+
 namespace aidl {
 namespace android {
 namespace hardware {
@@ -26,11 +28,8 @@ namespace stats {
 
 AocStateResidencyDataProvider::AocStateResidencyDataProvider(std::vector<std::pair<std::string,
         std::string>> ids, std::vector<std::pair<std::string, std::string>> states) {
-    // AoC stats are reported in ticks of 244.140625ns. The transform
-    // function converts ticks to milliseconds.
-    // 1000000 / 244.140625 = 4096.
-    static const uint64_t AOC_CLK = 4096;
-    std::function<uint64_t(uint64_t)> aocTickToMs = [](uint64_t a) { return a / AOC_CLK; };
+    // AoC stats are reported in ticks
+    std::function<uint64_t(uint64_t)> aocTickToMs = [](uint64_t a) { return aoc_ticks_to_nanoseconds(a) / 1000000; };
     GenericStateResidencyDataProvider::StateResidencyConfig config = {
             .entryCountSupported = true,
             .entryCountPrefix = "Counter:",
