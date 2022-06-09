@@ -20,5 +20,6 @@ cc_library {
 
     shared_libs: [
         "android.hardware.power.stats-impl.pixel",
+        "libaoc",
     ],
 }
