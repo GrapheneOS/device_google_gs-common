@@ -39,7 +39,8 @@ class AocTimedStateResidencyDataProvider : public AocStateResidencyDataProvider 
   AocTimedStateResidencyDataProvider(
       std::vector<std::pair<std::string, std::string>> ids,
       std::vector<std::pair<std::string, std::string>> states,
-      const uint64_t timeoutMillis);
+      const uint64_t timeoutMillis,
+      const uint64_t aocClock);
   ~AocTimedStateResidencyDataProvider() = default;
 
   bool getStateResidencies(
