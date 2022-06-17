@@ -27,7 +27,8 @@ namespace stats {
 class AocStateResidencyDataProvider : public PowerStats::IStateResidencyDataProvider {
   public:
     AocStateResidencyDataProvider(std::vector<std::pair<std::string, std::string>> ids,
-                                  std::vector<std::pair<std::string, std::string>> states);
+                                  std::vector<std::pair<std::string, std::string>> states,
+                                  const uint64_t aocClock);
     ~AocStateResidencyDataProvider() = default;
     bool getStateResidencies(
         std::unordered_map<std::string, std::vector<StateResidency>> *residencies) override;
