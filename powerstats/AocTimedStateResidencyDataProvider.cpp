@@ -28,8 +28,9 @@ namespace stats {
 AocTimedStateResidencyDataProvider::AocTimedStateResidencyDataProvider(
     std::vector<std::pair<std::string, std::string>> ids,
     std::vector<std::pair<std::string, std::string>> states,
-    const uint64_t timeoutMillis)
-    : AocStateResidencyDataProvider(ids, states) {
+    const uint64_t timeoutMillis,
+    const uint64_t aocClock)
+    : AocStateResidencyDataProvider(ids, states, aocClock) {
   static const uint64_t DEFAULT_MAX_TIME_PER_STATE_MILLIS = 120;
 
   mTimeoutMillis =
