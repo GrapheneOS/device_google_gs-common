@@ -4,5 +4,5 @@ service gs_watchdogd /system_ext/bin/gs_watchdogd 10 20
     oneshot
     seclabel u:r:gs_watchdogd:s0
 
-on init && property:vendor.all.devices.ready=1
+on property:vendor.all.devices.ready=1
     start gs_watchdogd
