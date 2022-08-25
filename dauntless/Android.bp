@@ -1,0 +1,6 @@
+sh_binary {
+    name: "dump_gsc.sh",
+    src: "dump_gsc.sh",
+    vendor: true,
+    sub_dir: "dump",
+}
