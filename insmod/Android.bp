@@ -1,7 +1,7 @@
 sh_binary {
     name: "insmod.sh",
     src: "insmod.sh",
-    init_rc: ["init.insmod.rc"],
+    init_rc: ["init.module.rc"],
     vendor: true,
 }
 
