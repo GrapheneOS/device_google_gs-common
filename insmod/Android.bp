@@ -1,0 +1,13 @@
+sh_binary {
+    name: "insmod.sh",
+    src: "insmod.sh",
+    init_rc: ["init.module.rc"],
+    vendor: true,
+}
+
+prebuilt_etc {
+    name: "init.common.cfg",
+    src: "init.common.cfg",
+    vendor: true,
+}
+
