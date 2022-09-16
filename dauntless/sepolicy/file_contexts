@@ -4,6 +4,7 @@
 /vendor/bin/hw/android\.hardware\.security\.keymint-service\.citadel        u:object_r:hal_keymint_citadel_exec:s0
 /vendor/bin/hw/android\.hardware\.weaver@1\.0-service\.citadel              u:object_r:hal_weaver_citadel_exec:s0
 /vendor/bin/hw/android\.hardware\.identity@1\.0-service\.citadel            u:object_r:hal_identity_citadel_exec:s0
+/vendor/bin/hw/android\.hardware\.authsecret-service\.citadel               u:object_r:hal_authsecret_citadel_exec:s0
 /vendor/bin/hw/citadel_updater                                              u:object_r:citadel_updater:s0
 /vendor/bin/hw/citadeld                                                     u:object_r:citadeld_exec:s0
 
