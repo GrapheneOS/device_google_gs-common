@@ -6,6 +6,7 @@ PRODUCT_PACKAGES += \
     citadeld \
     citadel_updater \
     android.hardware.weaver@1.0-service.citadel \
+    android.hardware.weaver-service.citadel \
     android.hardware.authsecret-service.citadel \
     android.hardware.identity@1.0-service.citadel \
     init_citadel \
