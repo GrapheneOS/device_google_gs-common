@@ -21,9 +21,3 @@ PRODUCT_SOONG_NAMESPACES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	vendor.media.omx=0
 
-# Platform watchdogd
-PRODUCT_PACKAGES += gs_watchdogd
-PRODUCT_SOONG_NAMESPACES += \
-	device/google/gs-common/gs_watchdogd
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += \
-	hardware/google/pixel-sepolicy/gs_watchdogd
