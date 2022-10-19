@@ -14,28 +14,7 @@
  * limitations under the License.
  */
 #include <stdio.h>
-#include <string>
-#include <android-base/file.h>
-#include <fstream>
-#include <iostream>
-
-// Format title and content output.
-void dumpFileContent(const char* title, const char* file_path) {
-    std::string content;
-    printf("------ %s (%s) ------\n", title, file_path);
-    if (android::base::ReadFileToString(file_path, &content)) {
-        printf("%s\n", content.c_str());
-    } else {
-        printf("Unable to read %s\n", file_path);
-    }
-    return;
-}
-
-void command(const char* title, const char* cmd){
-    printf("------ %s (%s) ------\n", title, cmd);
-    system(cmd);
-    return;
-}
+#include <dump/pixel_dump.h>
 
 // Dump Aoc.
 int main() {
@@ -52,10 +31,10 @@ int main() {
     dumpFileContent("AoC memory exception wake", "/sys/devices/platform/19000000.aoc/control/memory_exception");
     dumpFileContent("AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_a32");
     dumpFileContent("AoC memory votes", "/sys/devices/platform/19000000.aoc/control/memory_votes_ff1");
-    command("clean AoC buffer","echo ' ' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
-    command("AoC Heap Stats (A32)", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
-    command("AoC Heap Stats (F1)", "echo 'dbg heap -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
-    command("AoC Heap Stats (HF0)", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
-    command("AoC Heap Stats (HF1)", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("clean AoC buffer","echo ' ' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("AoC Heap Stats (A32)", "echo 'dbg heap -c 1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("AoC Heap Stats (F1)", "echo 'dbg heap -c 2' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("AoC Heap Stats (HF0)", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("AoC Heap Stats (HF1)", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
     return 0;
 }

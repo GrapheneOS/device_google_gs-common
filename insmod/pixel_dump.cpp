@@ -13,15 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <dump/pixel_dump.h>
+#include <stdio.h>
+#include <string>
+#include <android-base/file.h>
 
-// Dump chip ID.
-int main() {
-    dumpFileContent("AP HW TUNE", "/sys/devices/system/chip-id/ap_hw_tune_str");
-    dumpFileContent("EVT VERSION", "/sys/devices/system/chip-id/evt_ver");
-    dumpFileContent("LOT ID", "/sys/devices/system/chip-id/lot_id");
-    dumpFileContent("PRODUCT ID", "/sys/devices/system/chip-id/product_id");
-    dumpFileContent("REVISION", "/sys/devices/system/chip-id/revision");
-    dumpFileContent("RAW STR", "/sys/devices/system/chip-id/raw_str");
-    return 0;
+// Format title and content output.
+void dumpFileContent(const char* title, const char* file_path) {
+    std::string content;
+    printf("------ %s (%s) ------\n", title, file_path);
+    if (android::base::ReadFileToString(file_path, &content)) {
+        printf("%s\n", content.c_str());
+    } else {
+        printf("Unable to read %s\n", file_path);
+    }
+    return;
+}
+
+// Format title and command output.
+void runCommand(const char* title, const char* cmd) {
+    printf("------ %s (%s)------\n", title, cmd);
+    system(cmd);
+    return;
 }
