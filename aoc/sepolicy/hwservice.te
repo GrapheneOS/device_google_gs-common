@@ -1,0 +1,6 @@
+# Audio
+type hal_audio_ext_hwservice, hwservice_manager_type;
+
+# AudioMetric
+type hal_audiometricext_hwservice, hwservice_manager_type;
+
