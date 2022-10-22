@@ -1,0 +1,4 @@
+# Audio
+vendor.google.whitechapel.audio.audioext::IAudioExt             u:object_r:hal_audio_ext_hwservice:s0
+vendor.google.audiometricext::IAudioMetricExt                   u:object_r:hal_audiometricext_hwservice:s0
+
