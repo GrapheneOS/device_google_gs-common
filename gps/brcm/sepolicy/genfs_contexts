@@ -1,0 +1,4 @@
+# GPS
+genfscon sysfs /devices/platform/10940000.spi/spi_master/spi5/spi5.0/nstandby   u:object_r:sysfs_gps:s0
+genfscon sysfs /devices/virtual/pps/pps0/assert_elapsed                         u:object_r:sysfs_gps_assert:s0
+
