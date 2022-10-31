@@ -49,6 +49,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_binary {
     name: "android.hardware.gnss@2.1-service-brcm",
+    init_rc: ["init.gps.rc"],
     arch: {
         arm64: {
             srcs: ["bin/android.hardware.gnss@2.1-service-brcm"],
