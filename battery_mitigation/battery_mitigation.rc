@@ -1,0 +1,93 @@
+on property:vendor.thermal.link_ready=1
+    mkdir /data/vendor/mitigation 0755 system system
+    chown system system /data/vendor/mitigation
+    start vendor.battery_mitigation
+
+on property:ro.boot.bootreason=reboot,uvlo,pmic,if
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,pmic,if
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,uvlo,pmic,main
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,uvlo,pmic,sub
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck1m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck2m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck3m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck4m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck5m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck6m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck7m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck8m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck9m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck10m
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck1s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck2s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck3s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck4s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck5s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck6s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck7s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck8s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck9s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buck10s
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buckds
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buckas
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buckcs
+    setprop vendor.startup_bugreport_requested 1
+
+on property:ro.boot.bootreason=reboot,ocp,buckbs
+    setprop vendor.startup_bugreport_requested 1
+
+service vendor.battery_mitigation /vendor/bin/hw/battery_mitigation
+    user system
+    group system
+    capabilities WAKE_ALARM BLOCK_SUSPEND
