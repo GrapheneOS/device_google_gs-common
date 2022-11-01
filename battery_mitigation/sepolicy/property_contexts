@@ -1,0 +1,3 @@
+# Battery Mitigation
+vendor.brownout.mitigation.ready           u:object_r:vendor_mitigation_ready_prop:s0
+vendor.startup_bugreport_requested         u:object_r:vendor_startup_bugreport_requested_prop:s0
