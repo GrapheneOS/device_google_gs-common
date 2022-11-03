@@ -1,0 +1,2 @@
+# Battery Mitigation
+set_prop(vendor_init, vendor_startup_bugreport_requested_prop)
