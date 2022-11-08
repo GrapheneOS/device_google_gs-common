@@ -3,6 +3,7 @@ type better_bug_app, domain, coredomain;
 userdebug_or_eng(`
   app_domain(better_bug_app)
   net_domain(better_bug_app)
+  allow better_bug_app shell_data_file:file read;
   allow better_bug_app app_api_service:service_manager find;
   allow better_bug_app system_api_service:service_manager find;
   allow better_bug_app privapp_data_file:file execute;
