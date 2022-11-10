@@ -1,3 +1,3 @@
 # Battery Mitigation
 vendor_internal_prop(vendor_mitigation_ready_prop)
-vendor_public_prop(vendor_startup_bugreport_requested_prop)
+vendor_public_prop(vendor_brownout_reason_prop)

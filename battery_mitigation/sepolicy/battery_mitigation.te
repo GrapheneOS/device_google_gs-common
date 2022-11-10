@@ -2,7 +2,6 @@ type battery_mitigation, domain;
 type battery_mitigation_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(battery_mitigation)
 get_prop(battery_mitigation, boot_status_prop)
-get_prop(battery_mitigation, vendor_startup_bugreport_requested_prop)
 set_prop(battery_mitigation, vendor_mitigation_ready_prop)
 
 hal_client_domain(battery_mitigation, hal_thermal);
