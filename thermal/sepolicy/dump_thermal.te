@@ -4,3 +4,7 @@ allow dump_thermal sysfs_thermal:dir r_dir_perms;
 allow dump_thermal sysfs_thermal:file r_file_perms;
 allow dump_thermal sysfs_thermal:lnk_file r_file_perms;
 allow dump_thermal vendor_toolbox_exec:file execute_no_trans;
+
+#vendor-metrics
+r_dir_file(dump_thermal, sysfs_vendor_metrics)
+allow dump_thermal sysfs_vendor_metrics:lnk_file r_file_perms;
