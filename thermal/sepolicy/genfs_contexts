@@ -1,3 +1,5 @@
 # thermal sysfs files
 genfscon sysfs /module/gs_thermal/parameters            u:object_r:sysfs_thermal:s0
 
+#vendor-metrics
+genfscon sysfs /kernel/metrics/temp_residency/temp_residency_all/stats      u:object_r:sysfs_vendor_metrics:s0
