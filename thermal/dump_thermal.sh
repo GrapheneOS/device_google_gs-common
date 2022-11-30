@@ -44,5 +44,3 @@ echo "TMU_SUB rise thresholds:"
 cat /sys/module/gs_thermal/parameters/tmu_sub_reg_dump_rise_thres
 echo "TMU_SUB fall thresholds:"
 cat /sys/module/gs_thermal/parameters/tmu_sub_reg_dump_fall_thres
-echo "Temperature Residency Metrics:"
-cat /sys/kernel/metrics/temp_residency/temp_residency_all/stats
