@@ -67,7 +67,7 @@ const struct MitigationConfig::Config cfg = {
 const char kReadyFilePath[] = "/sys/devices/virtual/pmic/mitigation/instruction/ready";
 const char kReadyProperty[] = "vendor.brownout.mitigation.ready";
 const char kLastMealPath[] = "/data/vendor/mitigation/lastmeal.txt";
-const char kBRRequestedProperty[] = "vendor.startup_bugreport_requested";
+const char kBRRequestedProperty[] = "vendor.brownout_reason";
 const std::regex kTimestampRegex("^\\S+\\s[0-9]+:[0-9]+:[0-9]+\\S+$");
 
 int main(int /*argc*/, char ** /*argv*/) {
@@ -80,8 +80,8 @@ int main(int /*argc*/, char ** /*argv*/) {
                                                                  cfg.LogFilePath,
                                                                  cfg.TimestampFormat,
                                                                  kTimestampRegex);
-    int startupBugreport = android::base::GetIntProperty(kBRRequestedProperty, 0);
-    if (startupBugreport && mitigationLogTimeValid) {
+    std::string reason = android::base::GetProperty(kBRRequestedProperty, "");
+    if (!reason.empty() && mitigationLogTimeValid) {
         std::ifstream src(cfg.LogFilePath, std::ios::in);
         std::ofstream dst(kLastMealPath, std::ios::out);
         dst << src.rdbuf();
