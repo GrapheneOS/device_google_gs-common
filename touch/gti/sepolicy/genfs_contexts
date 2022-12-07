@@ -1,2 +1,2 @@
 # Touch
-genfscon sysfs /devices/virtual/goog_touch_interface                            u:object_r:sysfs_touch:s0
+genfscon sysfs /devices/virtual/goog_touch_interface                            u:object_r:sysfs_touch_gti:s0
