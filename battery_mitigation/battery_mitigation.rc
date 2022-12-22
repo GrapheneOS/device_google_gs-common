@@ -3,88 +3,88 @@ on property:vendor.thermal.link_ready=1
     chown system system /data/vendor/mitigation
     start vendor.battery_mitigation
 
-on property:ro.boot.bootreason=reboot,uvlo,pmic,if
+on property:ro.boot.bootreason=reboot,uvlo,pmic,if && property:sys.boot.reason=reboot,uvlo,pmic,if
     setprop vendor.brownout_reason "uvlo,pmic,if"
 
-on property:ro.boot.bootreason=reboot,ocp,pmic,if
+on property:ro.boot.bootreason=reboot,ocp,pmic,if && property:sys.boot.reason=reboot,ocp,pmic,if
     setprop vendor.brownout_reason "ocp,pmic,if"
 
-on property:ro.boot.bootreason=reboot,uvlo,pmic,main
+on property:ro.boot.bootreason=reboot,uvlo,pmic,main && property:sys.boot.reason=reboot,uvlo,pmic,main
     setprop vendor.brownout_reason "uvlo,pmic,main"
 
-on property:ro.boot.bootreason=reboot,uvlo,pmic,sub
+on property:ro.boot.bootreason=reboot,uvlo,pmic,sub && property:sys.boot.reason=reboot,uvlo,pmic,sub
     setprop vendor.brownout_reason "uvlo,pmic,sub"
 
-on property:ro.boot.bootreason=reboot,ocp,buck1m
+on property:ro.boot.bootreason=reboot,ocp,buck1m && property:sys.boot.reason=reboot,ocp,buck1m
     setprop vendor.brownout_reason "ocp,buck1m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck2m
+on property:ro.boot.bootreason=reboot,ocp,buck2m && property:sys.boot.reason=reboot,ocp,buck2m
     setprop vendor.brownout_reason "ocp,buck2m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck3m
+on property:ro.boot.bootreason=reboot,ocp,buck3m && property:sys.boot.reason=reboot,ocp,buck3m
     setprop vendor.brownout_reason "ocp,buck3m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck4m
+on property:ro.boot.bootreason=reboot,ocp,buck4m && property:sys.boot.reason=reboot,ocp,buck4m
     setprop vendor.brownout_reason "ocp,buck4m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck5m
+on property:ro.boot.bootreason=reboot,ocp,buck5m && property:sys.boot.reason=reboot,ocp,buck5m
     setprop vendor.brownout_reason "ocp,buck5m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck6m
+on property:ro.boot.bootreason=reboot,ocp,buck6m && property:sys.boot.reason=reboot,ocp,buck6m
     setprop vendor.brownout_reason "ocp,buck6m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck7m
+on property:ro.boot.bootreason=reboot,ocp,buck7m && property:sys.boot.reason=reboot,ocp,buck7m
     setprop vendor.brownout_reason "ocp,buck7m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck8m
+on property:ro.boot.bootreason=reboot,ocp,buck8m && property:sys.boot.reason=reboot,ocp,buck8m
     setprop vendor.brownout_reason "ocp,buck8m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck9m
+on property:ro.boot.bootreason=reboot,ocp,buck9m && property:sys.boot.reason=reboot,ocp,buck9m
     setprop vendor.brownout_reason "ocp,buck9m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck10m
+on property:ro.boot.bootreason=reboot,ocp,buck10m && property:sys.boot.reason=reboot,ocp,buck10m
     setprop vendor.brownout_reason "ocp,buck10m"
 
-on property:ro.boot.bootreason=reboot,ocp,buck1s
+on property:ro.boot.bootreason=reboot,ocp,buck1s && property:sys.boot.reason=reboot,ocp,buck1s
     setprop vendor.brownout_reason "ocp,buck1s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck2s
+on property:ro.boot.bootreason=reboot,ocp,buck2s && property:sys.boot.reason=reboot,ocp,buck2s
     setprop vendor.brownout_reason "ocp,buck2s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck3s
+on property:ro.boot.bootreason=reboot,ocp,buck3s && property:sys.boot.reason=reboot,ocp,buck3s
     setprop vendor.brownout_reason "ocp,buck3s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck4s
+on property:ro.boot.bootreason=reboot,ocp,buck4s && property:sys.boot.reason=reboot,ocp,buck4s
     setprop vendor.brownout_reason "ocp,buck4s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck5s
+on property:ro.boot.bootreason=reboot,ocp,buck5s && property:sys.boot.reason=reboot,ocp,buck5s
     setprop vendor.brownout_reason "ocp,buck5s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck6s
+on property:ro.boot.bootreason=reboot,ocp,buck6s && property:sys.boot.reason=reboot,ocp,buck6s
     setprop vendor.brownout_reason "ocp,buck6s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck7s
+on property:ro.boot.bootreason=reboot,ocp,buck7s && property:sys.boot.reason=reboot,ocp,buck7s
     setprop vendor.brownout_reason "ocp,buck7s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck8s
+on property:ro.boot.bootreason=reboot,ocp,buck8s && property:sys.boot.reason=reboot,ocp,buck8s
     setprop vendor.brownout_reason "ocp,buck8s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck9s
+on property:ro.boot.bootreason=reboot,ocp,buck9s && property:sys.boot.reason=reboot,ocp,buck9s
     setprop vendor.brownout_reason "ocp,buck9s"
 
-on property:ro.boot.bootreason=reboot,ocp,buck10s
+on property:ro.boot.bootreason=reboot,ocp,buck10s && property:sys.boot.reason=reboot,ocp,buck10s
     setprop vendor.brownout_reason "ocp,buck10s"
 
-on property:ro.boot.bootreason=reboot,ocp,buckds
+on property:ro.boot.bootreason=reboot,ocp,buckds && property:sys.boot.reason=reboot,ocp,buckds
     setprop vendor.brownout_reason "ocp,buckds"
 
-on property:ro.boot.bootreason=reboot,ocp,buckas
+on property:ro.boot.bootreason=reboot,ocp,buckas && property:sys.boot.reason=reboot,ocp,buckas
     setprop vendor.brownout_reason "ocp,buckas"
 
-on property:ro.boot.bootreason=reboot,ocp,buckcs
+on property:ro.boot.bootreason=reboot,ocp,buckcs && property:sys.boot.reason=reboot,ocp,buckcs
     setprop vendor.brownout_reason "ocp,buckcs"
 
-on property:ro.boot.bootreason=reboot,ocp,buckbs
+on property:ro.boot.bootreason=reboot,ocp,buckbs && property:sys.boot.reason=reboot,ocp,buckbs
     setprop vendor.brownout_reason "ocp,buckbs"
 
 service vendor.battery_mitigation /vendor/bin/hw/battery_mitigation
