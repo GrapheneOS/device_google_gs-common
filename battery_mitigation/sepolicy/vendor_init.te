@@ -1,2 +1,3 @@
 # Battery Mitigation
 set_prop(vendor_init, vendor_brownout_reason_prop)
+get_prop(vendor_init, system_boot_reason_prop)
