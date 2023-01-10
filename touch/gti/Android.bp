@@ -5,6 +5,7 @@ package {
 sh_binary {
     name: "dump_gti.sh",
     src: "dump_gti.sh",
+    init_rc: ["init.touch.gti.rc"],
     vendor: true,
     sub_dir: "dump",
 }
