@@ -22,3 +22,5 @@
 /data/vendor/hal_neuralnetworks_darwinn(/.*)?                              u:object_r:hal_neuralnetworks_darwinn_data_file:s0
 /data/vendor/edgetpu(/.*)?                                                 u:object_r:edgetpu_vendor_service_data_file:s0
 
+# EdgeTPU DBA service
+/vendor/bin/hw/com\.google\.edgetpu.dba-service                            u:object_r:edgetpu_dba_server_exec:s0
