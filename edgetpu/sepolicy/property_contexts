@@ -1,3 +1,5 @@
 # for EdgeTPU
 vendor.edgetpu.service.                         u:object_r:vendor_edgetpu_service_prop:s0
 
+# for DarwinnDelegate
+vendor.edgetpu.tflite_delegate.                 u:object_r:vendor_tflite_delegate_prop:s0
