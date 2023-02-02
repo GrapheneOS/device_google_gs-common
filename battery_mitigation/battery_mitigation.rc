@@ -87,6 +87,9 @@ on property:ro.boot.bootreason=reboot,ocp,buckcs && property:sys.boot.reason=reb
 on property:ro.boot.bootreason=reboot,ocp,buckbs && property:sys.boot.reason=reboot,ocp,buckbs
     setprop vendor.brownout_reason "ocp,buckbs"
 
+on property:vendor.brownout.br.feasible=1
+    chown system system data/vendor/mitigation/lastmeal.txt
+
 service vendor.battery_mitigation /vendor/bin/hw/battery_mitigation
     user system
     group system

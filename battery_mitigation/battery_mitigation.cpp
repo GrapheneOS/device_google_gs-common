@@ -68,6 +68,7 @@ const char kReadyFilePath[] = "/sys/devices/virtual/pmic/mitigation/instruction/
 const char kReadyProperty[] = "vendor.brownout.mitigation.ready";
 const char kLastMealPath[] = "/data/vendor/mitigation/lastmeal.txt";
 const char kBRRequestedProperty[] = "vendor.brownout_reason";
+const char kLastMealProperty[] = "vendor.brownout.br.feasible";
 const std::regex kTimestampRegex("^\\S+\\s[0-9]+:[0-9]+:[0-9]+\\S+$");
 
 int main(int /*argc*/, char ** /*argv*/) {
@@ -85,6 +86,7 @@ int main(int /*argc*/, char ** /*argv*/) {
         std::ifstream src(cfg.LogFilePath, std::ios::in);
         std::ofstream dst(kLastMealPath, std::ios::out);
         dst << src.rdbuf();
+        android::base::SetProperty(kLastMealProperty, "1");
     }
     bool isBatteryMitigationReady = false;
     std::string ready_str;
