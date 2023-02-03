@@ -5,6 +5,7 @@ get_prop(battery_mitigation, boot_status_prop)
 get_prop(battery_mitigation, vendor_brownout_reason_prop)
 get_prop(battery_mitigation, system_boot_reason_prop)
 set_prop(battery_mitigation, vendor_mitigation_ready_prop)
+set_prop(battery_mitigation, vendor_brownout_br_feasible_prop)
 
 hal_client_domain(battery_mitigation, hal_thermal);
 hal_client_domain(battery_mitigation, hal_health);
