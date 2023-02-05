@@ -1,0 +1,2 @@
+# Allow vendor_init to set tflite Darwinn delegate properties
+set_prop(vendor_init, vendor_tflite_delegate_prop)
