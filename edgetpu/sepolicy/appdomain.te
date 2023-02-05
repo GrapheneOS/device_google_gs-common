@@ -1,0 +1,2 @@
+# Allow apps to read tflite Darwinn delegate properties
+get_prop(appdomain, vendor_tflite_delegate_prop)
