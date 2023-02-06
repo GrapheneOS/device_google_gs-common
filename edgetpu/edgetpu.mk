@@ -25,3 +25,6 @@ PRODUCT_PACKAGES += com.google.edgetpu.dba-service
 PRODUCT_PACKAGES += libedgetpu_dba.google
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/edgetpu/sepolicy
+
+# Tflite Darwinn delegate property
+PRODUCT_VENDOR_PROPERTIES += vendor.edgetpu.tflite_delegate.force_disable_io_coherency=1
