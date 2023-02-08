@@ -100,19 +100,21 @@ bool CpupmStateResidencyDataProvider::getStateResidencies(
             stateId = temp;
         }
 
-        if (stateId >= 0) {
-            entityIndex = matchEntity(line);
-            it = residencies->find(mConfig.entities[entityIndex].first);
+        if (stateId < 0) continue;
 
-            if (it != residencies->end()) {
-                if (parseState(line, &duration, &count)) {
-                    it->second[stateId].totalTimeInStateMs = duration / US_TO_MS;
-                    it->second[stateId].totalStateEntryCount = count;
-                } else {
-                    LOG(ERROR) << "Failed to parse duration and count from [" << std::string(line)
-                               << "]";
-                    return false;
-                }
+        entityIndex = matchEntity(line);
+
+        if (entityIndex < 0) continue;
+
+        it = residencies->find(mConfig.entities[entityIndex].first);
+        if (it != residencies->end()) {
+            if (parseState(line, &duration, &count)) {
+                it->second[stateId].totalTimeInStateMs = duration / US_TO_MS;
+                it->second[stateId].totalStateEntryCount = count;
+            } else {
+                LOG(ERROR) << "Failed to parse duration and count from [" << std::string(line)
+                           << "]";
+                return false;
             }
         }
     }
