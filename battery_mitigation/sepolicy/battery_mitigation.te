@@ -21,3 +21,6 @@ allow battery_mitigation sysfs_bcl:lnk_file r_file_perms;
 allow battery_mitigation sysfs_thermal:lnk_file r_file_perms;
 allow battery_mitigation mitigation_vendor_data_file:dir rw_dir_perms;
 allow battery_mitigation mitigation_vendor_data_file:file create_file_perms;
+
+# Allow battery_mitigation to use Binder IPC so that service manager can notify it for callbacks
+binder_use(battery_mitigation)
