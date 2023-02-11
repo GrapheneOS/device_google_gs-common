@@ -26,6 +26,8 @@ binder_call(edgetpu_app_server, system_server);
 
 # Allow EdgeTPU service to read EdgeTPU service related system properties.
 get_prop(edgetpu_app_server, vendor_edgetpu_service_prop);
+# Allow EdgeTPU service to read device_configs that are set by the cloud server.
+get_prop(edgetpu_app_server, device_config_edgetpu_native_prop);
 
 # Allow EdgeTPU service to generate Perfetto traces.
 perfetto_producer(edgetpu_app_server);
