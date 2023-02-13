@@ -2,6 +2,13 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+sh_binary {
+    name: "dump_memory.sh",
+    src: "dump_memory.sh",
+    vendor: true,
+    sub_dir: "dump",
+}
+
 cc_binary {
     name: "dump_soc",
     srcs: ["dump_soc.cpp"],
