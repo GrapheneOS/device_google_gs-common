@@ -34,10 +34,16 @@ class CpupmStateResidencyDataProvider : public PowerStats::IStateResidencyDataPr
         std::vector<std::pair<std::string, std::string>> states;
     };
 
+    typedef std::vector<std::string> SleepConfig;
+
     /*
      * path - path to cpupm sysfs node.
      */
-    CpupmStateResidencyDataProvider(const std::string &path, const Config &config);
+    CpupmStateResidencyDataProvider(
+        const std::string &path,
+        const Config &config,
+        const std::string &sleepPath,
+        const SleepConfig &sleepConfig);
     ~CpupmStateResidencyDataProvider() = default;
 
     /*
@@ -58,9 +64,13 @@ class CpupmStateResidencyDataProvider : public PowerStats::IStateResidencyDataPr
 
     // A constant to represent the number of microseconds in one millisecond.
     const uint64_t US_TO_MS = 1000;
+    // A constant to represent the number of nanoseconds in one millisecond.
+    const uint64_t NS_TO_MS = 1000000;
 
     const std::string mPath;
     const Config mConfig;
+    const std::string mSleepPath;
+    const SleepConfig mSleepConfig;
 };
 
 }  // namespace stats
