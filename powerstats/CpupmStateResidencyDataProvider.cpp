@@ -34,8 +34,14 @@ namespace power {
 namespace stats {
 
 CpupmStateResidencyDataProvider::CpupmStateResidencyDataProvider(
-        const std::string &path, const Config &config)
-    : mPath(std::move(path)), mConfig(std::move(config)) {}
+        const std::string &path,
+        const Config &config,
+        const std::string &sleepPath,
+        const SleepConfig &sleepConfig)
+    : mPath(std::move(path)),
+      mConfig(std::move(config)),
+      mSleepPath(std::move(sleepPath)),
+      mSleepConfig(std::move(sleepConfig)) {}
 
 int32_t CpupmStateResidencyDataProvider::matchState(char const *line) {
     for (int32_t i = 0; i < mConfig.states.size(); i++) {
@@ -78,6 +84,12 @@ bool CpupmStateResidencyDataProvider::getStateResidencies(
         return false;
     }
 
+    std::unique_ptr<FILE, decltype(&fclose)> sleepFp(fopen(mSleepPath.c_str(), "r"), fclose);
+    if (!sleepFp) {
+        PLOG(ERROR) << __func__ << ":Failed to open file " << mSleepPath;
+        return false;
+    }
+
     for (int32_t i = 0; i < mConfig.entities.size(); i++) {
         std::vector<StateResidency> stateResidencies(mConfig.states.size());
         for (int32_t j = 0; j < stateResidencies.size(); j++) {
@@ -90,9 +102,29 @@ bool CpupmStateResidencyDataProvider::getStateResidencies(
     char *line = nullptr;
 
     int32_t temp, entityIndex, stateId = -1;
-    uint64_t duration, count;
+    uint64_t duration, count, sleepDurationMs = 0;
     auto it = residencies->end();
+    int32_t sleepIndex = 0;
 
+    // Parse state for sleep duration
+    while (getline(&line, &len, sleepFp.get()) != -1) {
+        std::string trimedLine = Trim(std::string(line));
+        if (StartsWith(trimedLine, mSleepConfig[sleepIndex])) {
+            if (sleepIndex < mSleepConfig.size() - 1) {
+                sleepIndex++;
+                continue;
+            } else {
+                std::vector<std::string> parts = Split(trimedLine, " ");
+                if (parts.size() == 2) {
+                    ParseUint(parts[1], &sleepDurationMs);
+                    sleepDurationMs /= NS_TO_MS;
+                }
+                break;
+            }
+        }
+    }
+
+    // Parse state for CPUPM entities
     while (getline(&line, &len, fp.get()) != -1) {
         temp = matchState(line);
         // Assign new id only when a new valid state is encountered.
@@ -109,7 +141,7 @@ bool CpupmStateResidencyDataProvider::getStateResidencies(
         it = residencies->find(mConfig.entities[entityIndex].first);
         if (it != residencies->end()) {
             if (parseState(line, &duration, &count)) {
-                it->second[stateId].totalTimeInStateMs = duration / US_TO_MS;
+                it->second[stateId].totalTimeInStateMs = duration / US_TO_MS + sleepDurationMs;
                 it->second[stateId].totalStateEntryCount = count;
             } else {
                 LOG(ERROR) << "Failed to parse duration and count from [" << std::string(line)
