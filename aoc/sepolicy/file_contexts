@@ -5,6 +5,8 @@
 /dev/acd-audio_input_tuning         u:object_r:aoc_device:s0
 /dev/acd-audio_input_bulk_tx        u:object_r:aoc_device:s0
 /dev/acd-audio_input_bulk_rx        u:object_r:aoc_device:s0
+/dev/acd-audio_rtp_tx               u:object_r:aoc_device:s0
+/dev/acd-audio_rtp_rx               u:object_r:aoc_device:s0
 /dev/acd-sound_trigger              u:object_r:aoc_device:s0
 /dev/acd-hotword_notification       u:object_r:aoc_device:s0
 /dev/acd-hotword_pcm                u:object_r:aoc_device:s0
