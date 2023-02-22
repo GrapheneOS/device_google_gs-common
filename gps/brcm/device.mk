@@ -1,6 +1,6 @@
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/gps/brcm/sepolicy
 
-PRODUCT_SOONG_NAMESPACES += vendor/broadcom/gps/bcm47765
+PRODUCT_SOONG_NAMESPACES += device/google/gs-common/gps/brcm/prebuilt
 
 PRODUCT_PACKAGES += \
 	bcm47765_gps_package \
