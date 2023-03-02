@@ -83,10 +83,7 @@ void dumpLogs(const char* SrcDir, const char* DestDir, int limit, const char* pr
         }
 
         copiedFiles++;
-
-        std::ifstream src(concatenatePath(SrcDir, dirent_list[i]->d_name).c_str(), std::ios::binary);
-        std::ofstream dst(concatenatePath(DestDir, dirent_list[i]->d_name).c_str(), std::ios::binary);
-        dst << src.rdbuf();
+        copyFile(concatenatePath(SrcDir, dirent_list[i]->d_name).c_str(), concatenatePath(DestDir, dirent_list[i]->d_name).c_str());
     }
 
     while (num_entries--) {
@@ -96,3 +93,11 @@ void dumpLogs(const char* SrcDir, const char* DestDir, int limit, const char* pr
     free(dirent_list);
     return;
 }
+
+void copyFile(const char* SrcDir, const char* DestDir) {
+    std::ifstream src(SrcDir, std::ios::binary);
+    std::ofstream dst(DestDir, std::ios::binary);
+    dst << src.rdbuf();
+    return;
+}
+
