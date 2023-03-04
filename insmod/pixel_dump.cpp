@@ -98,6 +98,8 @@ void copyFile(const char* SrcDir, const char* DestDir) {
     std::ifstream src(SrcDir, std::ios::binary);
     std::ofstream dst(DestDir, std::ios::binary);
     dst << src.rdbuf();
+    src.close();
+    dst.close();
     return;
 }
 
