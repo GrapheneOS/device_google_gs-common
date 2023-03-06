@@ -1,0 +1,9 @@
+pixel_bugreport(dump_modemlog)
+
+userdebug_or_eng(`
+  allow dump_modemlog mnt_vendor_file:dir search;
+  allow dump_modemlog modem_efs_file:dir search;
+  allow dump_modemlog modem_efs_file:file r_file_perms;
+  allow dump_modemlog radio_vendor_data_file:dir create_dir_perms;
+  allow dump_modemlog radio_vendor_data_file:file create_file_perms;
+')
