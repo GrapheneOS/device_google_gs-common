@@ -2,16 +2,9 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-sh_binary {
-    name: "dump_display_userdebug.sh",
-    src: "dump_display_userdebug.sh",
-    vendor: true,
-    sub_dir: "dump",
-}
-
 cc_binary {
-    name: "dump_display",
-    srcs: ["dump_display.cpp"],
+    name: "dump_camera",
+    srcs: ["dump_camera.cpp"],
     cflags: [
         "-Wall",
         "-Wextra",
@@ -19,9 +12,9 @@ cc_binary {
     ],
     shared_libs: [
         "libbase",
-        "libdump",
+	"libdump",
+	"liblog",
     ],
     vendor: true,
     relative_install_path: "dump",
 }
-
