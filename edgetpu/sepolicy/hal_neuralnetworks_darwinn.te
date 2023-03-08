@@ -51,3 +51,6 @@ binder_call(hal_neuralnetworks_darwinn, edgetpu_app_server);
 # Allow NNAPI HAL to send trace packets to Perfetto with SELinux enabled
 # under userdebug builds.
 userdebug_or_eng(`perfetto_producer(hal_neuralnetworks_darwinn)')
+
+# Allow NNAPI HAL to read tflite DarwiNN delegate properties
+get_prop(hal_neuralnetworks_darwinn, vendor_tflite_delegate_prop)
