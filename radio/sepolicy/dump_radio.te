@@ -1,0 +1,7 @@
+pixel_bugreport(dump_radio)
+
+userdebug_or_eng(`
+  allow dump_radio radio_vendor_data_file:dir create_dir_perms;
+  allow dump_radio radio_vendor_data_file:file create_file_perms;
+  get_prop(dump_radio, vendor_rild_prop)
+')
