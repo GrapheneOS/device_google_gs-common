@@ -22,20 +22,15 @@
 /dev/aoc                            u:object_r:aoc_device:s0
 /dev/acd-audio_ap_offload_rx        u:object_r:aoc_device:s0
 /dev/acd-audio_ap_offload_tx        u:object_r:aoc_device:s0
-/dev/amcs                           u:object_r:amcs_device:s0
 
 # AoC vendor binaries
 /vendor/bin/aocd                    u:object_r:aocd_exec:s0
 /vendor/bin/aocdump                 u:object_r:aocdump_exec:s0
 /vendor/bin/dump/dump_aoc           u:object_r:dump_aoc_exec:s0
-/vendor/bin/hw/vendor\.google\.audiometricext@1\.0-service-vendor           u:object_r:hal_audiometricext_default_exec:s0
 
 # AoC audio files
 /vendor/etc/aoc(/.*)?               u:object_r:aoc_audio_file:s0
 
 # Aoc persist files
 /mnt/vendor/persist/aoc(/.*)?       u:object_r:persist_aoc_file:s0
-/mnt/vendor/persist/audio(/.*)?     u:object_r:persist_audio_file:s0
 
-# Audio data files
-/data/vendor/audio(/.*)?            u:object_r:audio_vendor_data_file:s0
