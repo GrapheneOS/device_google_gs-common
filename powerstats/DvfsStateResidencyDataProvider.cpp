@@ -37,7 +37,7 @@ namespace stats {
 
 DvfsStateResidencyDataProvider::DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate,
         std::vector<Config> cfgs)
-    : mPath(std::move(path)), mClockRate(clockRate), mPowerEntities(std::move(cfgs)) {}
+    : mPowerEntities(std::move(cfgs)), mPath(std::move(path)), mClockRate(clockRate) {}
 
 int32_t DvfsStateResidencyDataProvider::matchEntity(char const *line) {
     for (int32_t i = 0; i < mPowerEntities.size(); i++) {
