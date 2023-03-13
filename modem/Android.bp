@@ -18,7 +18,9 @@ cc_binary {
         "-Werror",
     ],
     shared_libs: [
+        "libbase",
         "libdump",
+        "liblog",
     ],
     vendor: true,
     relative_install_path: "dump",
