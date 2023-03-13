@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ * Copyright (C) 2023 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 #pragma once
 
-#include <PowerStatsAidl.h>
+#include "DvfsStateResidencyDataProvider.h"
 
 namespace aidl {
 namespace android {
@@ -23,22 +23,20 @@ namespace hardware {
 namespace power {
 namespace stats {
 
-class DvfsStateResidencyDataProvider : public PowerStats::IStateResidencyDataProvider {
+class AdaptiveDvfsStateResidencyDataProvider : public DvfsStateResidencyDataProvider {
   public:
-    class Config {
-      public:
-        // Power entity name to parse.
-        std::string powerEntityName;
-
-        // List of state pairs (name to display, name to parse).
-        std::vector<std::pair<std::string, std::string>> states;
-    };
     /*
      * path - path to dvfs sysfs node.
      * clockRate - clock rate in KHz.
+     * powerEntityName - power entity name to parse.
+     * freqPath - path to frequency table.
      */
-    DvfsStateResidencyDataProvider(std::string path, uint64_t clockRate, std::vector<Config> cfgs);
-    ~DvfsStateResidencyDataProvider() = default;
+    AdaptiveDvfsStateResidencyDataProvider(
+        std::string path,
+        uint64_t clockRate,
+        std::string powerEntityName,
+        std::string freqPath);
+    ~AdaptiveDvfsStateResidencyDataProvider() = default;
 
     /*
      * See IStateResidencyDataProvider::getStateResidencies
@@ -50,17 +48,6 @@ class DvfsStateResidencyDataProvider : public PowerStats::IStateResidencyDataPro
      * See IStateResidencyDataProvider::getInfo
      */
     std::unordered_map<std::string, std::vector<State>> getInfo() override;
-
-  protected:
-    std::vector<Config> mPowerEntities;
-
-  private:
-    int32_t matchEntity(char const *line);
-    int32_t matchState(char const *line, const Config& powerEntity);
-    bool parseState(char const *line, uint64_t *duration, uint64_t *count);
-
-    const std::string mPath;
-    const uint64_t mClockRate;
 };
 
 }  // namespace stats
