@@ -103,6 +103,10 @@ bool DvfsStateResidencyDataProvider::getStateResidencies(
             it = residencies->find(mPowerEntities[powerEntityIndex].powerEntityName + nameSuffix);
         }
 
+        // The given string is last state for each entity.
+        if (StartsWith(Trim(std::string(line)), "last_freq_change_time_ns:"))
+            it = residencies->end();
+
         if (it != residencies->end()) {
             stateId = matchState(line, mPowerEntities[powerEntityIndex]);
 
