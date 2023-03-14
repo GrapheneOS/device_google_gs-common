@@ -8,3 +8,4 @@ vendor.audiodump.output.dir                     u:object_r:vendor_audio_prop:s0
 vendor.audiodump.encode.disable                 u:object_r:vendor_audio_prop:s0
 vendor.audiodump.log.cca.updated                u:object_r:vendor_audio_prop:s0
 vendor.audiodump.cca.config                     u:object_r:vendor_audio_prop:s0
+vendor.audio_hal.aidl.enable                    u:object_r:vendor_audio_prop:s0
