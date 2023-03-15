@@ -28,14 +28,12 @@ class AdaptiveDvfsStateResidencyDataProvider : public DvfsStateResidencyDataProv
     /*
      * path - path to dvfs sysfs node.
      * clockRate - clock rate in KHz.
-     * powerEntityName - power entity name to parse.
-     * freqPath - path to frequency table.
+     * powerEntities - list of power entity pairs (name to power entity, path to frequency table)
      */
     AdaptiveDvfsStateResidencyDataProvider(
         std::string path,
         uint64_t clockRate,
-        std::string powerEntityName,
-        std::string freqPath);
+        std::vector<std::pair<std::string, std::string>> powerEntities);
     ~AdaptiveDvfsStateResidencyDataProvider() = default;
 
     /*

@@ -25,6 +25,9 @@
 using android::base::Split;
 using android::base::Trim;
 
+static const std::string pathSuffix = "/time_in_state";
+static const std::string stateSuffix = "MHz";
+
 namespace aidl {
 namespace android {
 namespace hardware {
@@ -34,33 +37,35 @@ namespace stats {
 AdaptiveDvfsStateResidencyDataProvider::AdaptiveDvfsStateResidencyDataProvider(
         std::string path,
         uint64_t clockRate,
-        std::string powerEntityName,
-        std::string freqPath)
+        std::vector<std::pair<std::string, std::string>> powerEntities)
     : DvfsStateResidencyDataProvider(path, clockRate, {}) {
-    std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(freqPath.c_str(), "r"), fclose);
-    if (!fp) {
-        PLOG(ERROR) << __func__ << ":Failed to open file " << freqPath;
-        return;
-    }
-
     size_t len = 0;
     char *line = nullptr;
-    std::string suffix = "MHz";
     std::vector<std::pair<std::string, std::string>> states = {};
     std::vector<std::string> parts;
-    std::string freqStr;
 
-    while (getline(&line, &len, fp.get()) != -1) {
-        parts = Split(line, " ");
-        if (parts.size() > 0) {
-            freqStr = Trim(parts[0]);
-            states.push_back(std::make_pair(
-                    freqStr.substr(0, freqStr.length() - 3) + suffix,
-                    freqStr));
+    for (int32_t i = 0; i < powerEntities.size(); i++) {
+        std::string freqPath = powerEntities[i].second + pathSuffix;
+        std::unique_ptr<FILE, decltype(&fclose)> fp(fopen(freqPath.c_str(), "r"), fclose);
+        if (!fp) {
+            PLOG(ERROR) << __func__ << ":Failed to open file " << freqPath;
+            continue;
         }
+
+        while (getline(&line, &len, fp.get()) != -1) {
+            parts = Split(Trim(std::string(line)), " ");
+            if (parts.size() > 0) {
+                std::string freqStr = Trim(parts[0]);
+                states.push_back(std::make_pair(
+                        freqStr.substr(0, freqStr.length() - 3) + stateSuffix,
+                        freqStr));
+            }
+        }
+
+        mPowerEntities.push_back({powerEntities[i].first, std::move(states)});
     }
 
-    mPowerEntities.push_back({powerEntityName, std::move(states)});
+    free(line);
 }
 
 bool AdaptiveDvfsStateResidencyDataProvider::getStateResidencies(
