@@ -7,6 +7,7 @@ genfscon sysfs /devices/platform/17000050.devfreq_cam/devfreq/17000050.devfreq_c
 genfscon sysfs /devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/time_in_state       u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/time_in_state       u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/17000080.devfreq_bw/devfreq/17000080.devfreq_bw/time_in_state         u:object_r:sysfs_cpu:s0
+genfscon sysfs /devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo/time_in_state         u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/17000090.devfreq_dsu/devfreq/17000090.devfreq_dsu/time_in_state       u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/170000a0.devfreq_bci/devfreq/170000a0.devfreq_bci/time_in_state       u:object_r:sysfs_cpu:s0
 genfscon sysfs /devices/platform/1f000000.mali/time_in_state                                           u:object_r:sysfs_cpu:s0
