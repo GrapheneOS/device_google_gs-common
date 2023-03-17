@@ -39,3 +39,5 @@ userdebug_or_eng(`perfetto_producer(edgetpu_dba_server)')
 
 # Allow EdgeTPU DBA service to read tflite Darwinn delegate properties
 get_prop(edgetpu_dba_server, vendor_tflite_delegate_prop)
+# Allow EdgeTPU DBA service to read hetero runtime properties
+get_prop(edgetpu_dba_server, vendor_hetero_runtime_prop)
