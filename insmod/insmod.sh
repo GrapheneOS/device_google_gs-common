@@ -8,16 +8,29 @@
 #############################################################
 
 modules_dir=
+system_modules_dir=
+vendor_modules_dir=
 
-for f in /vendor/lib/modules/*/modules.dep /vendor/lib/modules/modules.dep; do
-  if [[ -f "$f" ]]; then
-    modules_dir="$(dirname "$f")"
-    break
-  fi
+for dir in system vendor; do
+  for f in /${dir}/lib/modules/*/modules.dep /${dir}/lib/modules/modules.dep; do
+    if [[ -f "$f" ]]; then
+      if [[ "${dir}" == "system" ]]; then
+        system_modules_dir="$(dirname "$f")"
+      else
+        vendor_modules_dir="$(dirname "$f")"
+        modules_dir=${vendor_modules_dir}
+      fi
+      break
+    fi
+  done
 done
 
-if [[ -z "${modules_dir}" ]]; then
-  echo "Unable to locate kernel modules directory" 2>&1
+if [[ -z "${system_modules_dir}" ]]; then
+  echo "Unable to locate system kernel modules directory" 2>&1
+fi
+
+if [[ -z "${vendor_modules_dir}" ]]; then
+  echo "Unable to locate vendor kernel modules directory" 2>&1
   exit 1
 fi
 
@@ -55,12 +68,23 @@ if [ -f $cfg_file ]; then
       "enable") echo 1 > $arg ;;
       "modprobe")
         case ${arg} in
-          "-b *" | "-b")
-            arg="-b --all=${modules_dir}/modules.load" ;;
-          "*" | "")
-            arg="--all=${modules_dir}/modules.load" ;;
+          "system -b *" | "system -b")
+            modules_dir=${system_modules_dir}
+            arg="-b --all=${system_modules_dir}/modules.load" ;;
+          "system *" | "system")
+            modules_dir=${system_modules_dir}
+            arg="--all=${system_modules_dir}/modules.load" ;;
+          "-b *" | "-b" | "vendor -b *" | "vendor -b")
+            modules_dir=${vendor_modules_dir}
+            arg="-b --all=${vendor_modules_dir}/modules.load" ;;
+          "*" | "" | "vendor *" | "vendor")
+            modules_dir=${vendor_modules_dir}
+            arg="--all=${vendor_modules_dir}/modules.load" ;;
         esac
-        modprobe -a -d "${modules_dir}" $arg ;;
+        if [[ -d "${modules_dir}" ]]; then
+          modprobe -a -d "${modules_dir}" $arg
+        fi
+        ;;
       "wait") wait_for_file $arg ;;
     esac
   done < $cfg_file
