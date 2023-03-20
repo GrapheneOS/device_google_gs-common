@@ -22,7 +22,23 @@
 #define RIL_LOG_NUMBER_PROPERTY "persist.vendor.ril.log.num_file"
 #define RIL_LOG_PREFIX "rild.log."
 
+#define TCPDUMP_LOG_DIRECTORY "/data/vendor/tcpdump_logger/logs"
+#define TCPDUMP_NUMBER_BUGREPORT "persist.vendor.tcpdump.log.br_num"
+#define TCPDUMP_PERSIST_PROPERTY "persist.vendor.tcpdump.log.alwayson"
+#define TCPDUMP_LOG_PREFIX "tcpdump"
+
 int main() {
+    // netmgr
+    bool tcpdumpEnabled = ::android::base::GetBoolProperty(TCPDUMP_PERSIST_PROPERTY, false);
+
+    if (tcpdumpEnabled) {
+        dumpLogs(TCPDUMP_LOG_DIRECTORY, BUGREPORT_PACKING_DIR, ::android::base::GetIntProperty(TCPDUMP_NUMBER_BUGREPORT, 5), TCPDUMP_LOG_PREFIX);
+    }
+    copyFile("/data/vendor/radio/metrics_data", "/data/vendor/radio/logs/always-on/all_logs/metrics_data");
+    copyFile("/data/vendor/radio/omadm_logs.txt", "/data/vendor/radio/logs/always-on/all_logs/omadm_logs.txt");
+    copyFile("/data/vendor/radio/power_anomaly_data.txt", "/data/vendor/radio/logs/always-on/all_logs/power_anomaly_data.txt");
+
+    // RIL dump
     std::string rilLogDir = ::android::base::GetProperty(RIL_LOG_DIRECTORY_PROPERTY, RIL_LOG_DIRECTORY);
 
     int maxFileNum = ::android::base::GetIntProperty(RIL_LOG_NUMBER_PROPERTY, 50);
