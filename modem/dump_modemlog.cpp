@@ -22,7 +22,9 @@
 #define MODEM_LOGGING_STATUS_PROPERTY "vendor.sys.modem.logging.status"
 #define MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY "persist.vendor.sys.modem.logging.br_num"
 #define MODEM_LOGGING_PATH_PROPERTY "vendor.sys.modem.logging.log_path"
+#define MODEM_SIM_DIRECTORY "/data/vendor/radio/sim/"
 #define MODEM_LOG_PREFIX "sbuff_"
+#define SIM_POWERON_LOG_PREFIX "sim_poweron_log_"
 
 int main() {
     bool modemLogEnabled = ::android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
@@ -55,6 +57,7 @@ int main() {
     }
 
     dumpLogs("/data/vendor/radio/extended_logs", BUGREPORT_PACKING_DIR, 20, "extended_log_");
+    dumpLogs(MODEM_SIM_DIRECTORY, BUGREPORT_PACKING_DIR, 1, SIM_POWERON_LOG_PREFIX);
     copyFile("/mnt/vendor/efs/nv_normal.bin", "/data/vendor/radio/logs/always-on/all_logs/nv_normal.bin");
     copyFile("/mnt/vendor/efs/nv_protected.bin", "/data/vendor/radio/logs/always-on/all_logs/nv_protected.bin");
     return 0;
