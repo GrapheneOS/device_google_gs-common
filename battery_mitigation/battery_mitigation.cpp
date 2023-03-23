@@ -17,6 +17,7 @@
 #define LOG_TAG "battery-mitigation"
 
 #include <battery_mitigation/BatteryMitigation.h>
+#include <android/binder_process.h>
 
 using android::hardware::google::pixel::BatteryMitigation;
 using android::hardware::google::pixel::MitigationConfig;
@@ -73,6 +74,8 @@ const std::regex kTimestampRegex("^\\S+\\s[0-9]+:[0-9]+:[0-9]+\\S+$");
 
 int main(int /*argc*/, char ** /*argv*/) {
     auto batteryMitigationStartTime = std::chrono::system_clock::now();
+    ABinderProcess_setThreadPoolMaxThreadCount(1);
+    ABinderProcess_startThreadPool();
     bmSp = new BatteryMitigation(cfg);
     if (!bmSp) {
         return 0;
