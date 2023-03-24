@@ -139,7 +139,7 @@ void Dumpstate::dumpLogSection(int fd, int fd_bin)
             ssize_t result = TEMP_FAILURE_RETRY(write(fd_bin, buffer.data(), bytes_read));
 
             if (result != bytes_read) {
-                ALOGD("Failed to write %ld bytes, actually written: %ld", bytes_read, result);
+                ALOGD("Failed to write %zd bytes, actually written: %zd", bytes_read, result);
                 break;
             }
         }
