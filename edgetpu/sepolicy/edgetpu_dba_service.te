@@ -12,6 +12,10 @@ binder_service(edgetpu_dba_server);
 # EdgeTPU DBA service to register the service to service_manager.
 add_service(edgetpu_dba_server, edgetpu_dba_service);
 
+# Allow EdgeTPU DBA service to access the edgetpu_app_service.
+allow edgetpu_dba_server edgetpu_app_service:service_manager find;
+binder_call(edgetpu_dba_server, edgetpu_app_server);
+
 # Allow EdgeTPU DBA service to look for TPU instance in /dev/edgetpu or /dev/edgetpu-soc.
 allow edgetpu_dba_server edgetpu_device:chr_file rw_file_perms;
 
