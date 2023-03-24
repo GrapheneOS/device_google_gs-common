@@ -31,8 +31,10 @@ std::string readFile(const std::string& file_path) {
 // Dump chip ID.
 int main() {
     dumpFileContent("AP HW TUNE", "/sys/devices/system/chip-id/ap_hw_tune_str");
+    dumpFileContent("DVFS VERSION", "/sys/devices/system/chip-id/dvfs_version");
     dumpFileContent("EVT VERSION", "/sys/devices/system/chip-id/evt_ver");
     dumpFileContent("LOT ID", "/sys/devices/system/chip-id/lot_id");
+    dumpFileContent("PACKAGE", "/sys/devices/system/chip-id/pkg_revision");
     dumpFileContent("PRODUCT ID", "/sys/devices/system/chip-id/product_id");
     dumpFileContent("REVISION", "/sys/devices/system/chip-id/revision");
     dumpFileContent("RAW STR", "/sys/devices/system/chip-id/raw_str");
