@@ -22,6 +22,8 @@
 #define GPS_TMP_LOG_DIRECTORY "/data/vendor/gps/logs/.tmp"
 #define GPS_LOG_PREFIX "gl-"
 #define GPS_MCU_LOG_PREFIX "esw-"
+#define GPS_MALLOC_LOG_DIRECTORY "/data/vendor/gps"
+#define GPS_MALLOC_LOG_PREFIX "malloc_"
 
 int main() {
     if(!::android::base::GetBoolProperty("vendor.gps.aol.enabled", false)) {
@@ -38,6 +40,7 @@ int main() {
     dumpLogs(GPS_TMP_LOG_DIRECTORY, outputDir.c_str(), 1, GPS_LOG_PREFIX);
     dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), 3, GPS_MCU_LOG_PREFIX);
     dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), maxFileNum, GPS_LOG_PREFIX);
+    dumpLogs(GPS_MALLOC_LOG_DIRECTORY, outputDir.c_str(), 1, GPS_MALLOC_LOG_PREFIX);
     return 0;
 }
 
