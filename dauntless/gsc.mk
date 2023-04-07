@@ -1,5 +1,6 @@
 # Dauntless
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/dauntless/sepolicy
+ifneq ($(wildcard vendor),)
 PRODUCT_SOONG_NAMESPACES += vendor/google_nos/init/dauntless
 
 PRODUCT_PACKAGES += \
@@ -19,3 +20,4 @@ PRODUCT_PACKAGES_DEBUG += citadel_integration_tests \
                           pwntest \
                           nugget_targeted_tests \
                           CitadelProvision
+endif
