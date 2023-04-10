@@ -17,7 +17,7 @@
 #include <android-base/properties.h>
 #include <android-base/file.h>
 
-#define maxGxpDebugDumps 8
+#define maxGxpDebugDumps 3
 
 int main() {
     if(::android::base::GetBoolProperty("vendor.gxp.attach_to_bugreport", false)) {
