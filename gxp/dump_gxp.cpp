@@ -17,10 +17,11 @@
 #include <android-base/properties.h>
 #include <android-base/file.h>
 
-#define maxGxpDebugDumps 8
+#define maxGxpDebugDumps 3
 
 int main() {
-    if(::android::base::GetBoolProperty("vendor.gxp.attach_to_bugreport", false)) {
+    /* TODO(b/277094681): Set default value to false around device beta milestone. */
+    if(::android::base::GetBoolProperty("vendor.gxp.attach_to_bugreport", true)) {
         std::string outputDir = concatenatePath(BUGREPORT_PACKING_DIR, "gxp_ssrdump");
         printf("Creating %s", outputDir.c_str());
         if (mkdir(outputDir.c_str(), 0777) == -1) {
