@@ -28,3 +28,6 @@ do
   echo --- used; cat $d/used;
   echo --- bitmap; cat $d/bitmap;
 done
+
+echo "------ Pixel Trace ------"
+cat "/sys/kernel/tracing/instances/pixel/trace"
