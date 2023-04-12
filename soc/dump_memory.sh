@@ -29,5 +29,18 @@ do
   echo --- bitmap; cat $d/bitmap;
 done
 
+echo "------ Pixel CMA stat ------"
+for d in $(ls -d /sys/kernel/pixel_stat/mm/cma/*); do
+  if [ -f $d ]; then
+    echo --- $d
+    cat $d
+  else
+    for f in $(ls $d); do
+      echo --- $d/$f
+      cat $d/$f
+    done
+  fi
+done
+
 echo "------ Pixel Trace ------"
 cat "/sys/kernel/tracing/instances/pixel/trace"
