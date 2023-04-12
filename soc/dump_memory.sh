@@ -20,3 +20,11 @@ cat "/d/dma_buf/bufinfo"
 echo "------ Page Pinner - longterm pin ------"
 cat "/sys/kernel/debug/page_pinner/buffer"
 
+echo "------ CMA info ------"
+for d in $(ls -d /sys/kernel/debug/cma/*)
+do
+  echo --- $d
+  echo --- count; cat $d/count;
+  echo --- used; cat $d/used;
+  echo --- bitmap; cat $d/bitmap;
+done
