@@ -4,6 +4,17 @@ DEVICE_MANIFEST_FILE += device/google/gs-common/audio/aidl/manifest.xml
 PRODUCT_PACKAGES += \
     android.hardware.audio.service-aidl.aoc
 
+# AIDL software effects. These are the effects supporting in all projects.
+# For the project-specific effects, such as haptic generator, please add them
+# to makefile in the project's device folder.
+PRODUCT_PACKAGES += \
+    libvisualizeraidl \
+    libbundleaidl \
+    libreverbaidl \
+    libdynamicsprocessingaidl \
+    libloudnessenhanceraidl \
+    libdownmixaidl \
+
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/audio/sepolicy/aidl
 
 include device/google/gs-common/audio/common.mk
