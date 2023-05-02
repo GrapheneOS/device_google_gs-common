@@ -1,0 +1,3 @@
+userdebug_or_eng(`
+    typeattribute proc_touch mlstrustedobject;
+')
