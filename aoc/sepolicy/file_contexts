@@ -22,6 +22,7 @@
 /dev/aoc                            u:object_r:aoc_device:s0
 /dev/acd-audio_ap_offload_rx        u:object_r:aoc_device:s0
 /dev/acd-audio_ap_offload_tx        u:object_r:aoc_device:s0
+/dev/acd-mel_processor              u:object_r:aoc_device:s0
 
 # AoC vendor binaries
 /vendor/bin/aocd                    u:object_r:aocd_exec:s0
