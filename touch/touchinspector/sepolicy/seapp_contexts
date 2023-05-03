@@ -1,0 +1,2 @@
+# Touch app
+user=_app seinfo=platform name=com.google.touch.touchinspector domain=google_touch_app type=app_data_file levelFrom=user
