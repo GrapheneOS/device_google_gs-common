@@ -1,0 +1,6 @@
+type pixelsystemservice_app, domain, coredomain;
+
+app_domain(pixelsystemservice_app);
+
+# Standard system services
+allow pixelsystemservice_app app_api_service:service_manager find;
