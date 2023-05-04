@@ -1,0 +1,10 @@
+type init-camera-set-interrupts-ownership, domain;
+type init-camera-set-interrupts-ownership_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-camera-set-interrupts-ownership)
+
+allow init-camera-set-interrupts-ownership vendor_toolbox_exec:file rx_file_perms;
+allow init-camera-set-interrupts-ownership proc_interrupts:file r_file_perms;
+allow init-camera-set-interrupts-ownership proc_irq:dir r_dir_perms;
+allow init-camera-set-interrupts-ownership proc_irq:file { r_file_perms setattr };
+allow init-camera-set-interrupts-ownership self:capability { chown setuid setgid };
