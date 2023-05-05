@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is to advertise that the camera device supports preview digital image stabilization
+     in both front and back cameras-->
+<permissions>
+    <feature name="vendor.android.hardware.camera.preview-dis.front" />
+    <feature name="vendor.android.hardware.camera.preview-dis.back" />
+</permissions>
