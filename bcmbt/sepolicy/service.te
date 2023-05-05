@@ -1,0 +1,2 @@
+# Bluetooth HAL extension
+type hal_bluetooth_coexistence_service, hal_service_type, service_manager_type;
