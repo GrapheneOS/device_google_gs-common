@@ -39,12 +39,6 @@ PRODUCT_SOONG_NAMESPACES += \
 # Calibration tool for debug builds
 PRODUCT_PACKAGES_DEBUG += tarasque_test
 
-# dualcamcapture only works for GMS build. Only enable this apk for GMS userdebug/eng builds
-ifeq (,$(filter aosp_% factory_%,$(TARGET_PRODUCT)))
-PRODUCT_PACKAGES_DEBUG += dualcamcapture
-PRODUCT_COPY_FILES += vendor/google/camera/devices/whi/preinstalled-packages-product-camera-device-vendor-debug.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/preinstalled-packages-product-camera-device-vendor-debug.xml
-endif
-
 endif  # vendor/google/camera check
 
 # Init-time log settings for Google 3A
@@ -55,8 +49,7 @@ PRODUCT_PACKAGES += libg3a_standalone_ghawb_rc
 # Vendor APEX which contains the camera HAL
 PRODUCT_PACKAGES += com.google.pixel.camera.hal
 PRODUCT_PACKAGES += init.camera.set-interrupts-ownership
+PRODUCT_PACKAGES += lyric_preview_dis_xml
 
 # sepolicy dir is added in dump.mk.
 # Make doesn't deduplicate sepolicy dirs, so including it here causes build errors.
-
-PRODUCT_COPY_FILES += vendor/google/services/LyricCameraHAL/src/vendor.android.hardware.camera.preview-dis.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.android.hardware.camera.preview-dis.xml
