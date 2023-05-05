@@ -1,12 +1,8 @@
 <manifest version="1.0" type="device">
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.bluetooth</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IBluetoothHci</name>
-            <instance>default</instance>
-        </interface>
+        <version>1</version>
+        <fqname>IBluetoothHci/default</fqname>
     </hal>
     <hal format="hidl">
         <name>hardware.google.bluetooth.bt_channel_avoidance</name>
