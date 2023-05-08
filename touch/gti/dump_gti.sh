@@ -14,6 +14,12 @@ echo 1 > $path/force_active
 echo "------ Touch Firmware Version ------"
 cat $path/fw_ver
 
+echo "------ Panel ID ------"
+cat $path/panel_id
+
+echo "------ Offload ID ------"
+cat $path/offload_id
+
 echo "------ Get Mutual Sensing Data - Baseline ------"
 cat $heatmap_path/ms_base
 
