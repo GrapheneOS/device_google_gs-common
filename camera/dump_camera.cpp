@@ -13,30 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <dump/pixel_dump.h>
-#include <android-base/properties.h>
 #include <android-base/file.h>
+#include <android-base/properties.h>
+#include <dump/pixel_dump.h>
+
+namespace {
+
+constexpr std::string_view kCameraLogDir = "/data/vendor/camera/profiler";
+constexpr std::string_view kGraphStateDumpDir = "/data/vendor/camera";
+
+}  // namespace
 
 int main() {
-    if (!::android::base::GetBoolProperty("vendor.camera.debug.camera_performance_analyzer.attach_to_bugreport", true)) {
-        return 0;
-    }
-
-    static const std::string kCameraLogDir = "/data/vendor/camera/profiler";
-    const std::string cameraDestDir = concatenatePath(BUGREPORT_PACKING_DIR, "camera");
-
-    if (mkdir(cameraDestDir.c_str(), 0777) == -1) {
-        printf("Unable to create folder: %s\n", cameraDestDir.c_str());
-        return 0;
-    }
-
-    // Attach multiple latest sessions (in case the user is running concurrent
-    // sessions or starts a new session after the one with performance issues).
-    dumpLogs(kCameraLogDir.c_str(), cameraDestDir.c_str(), 10, "session-ended-");
-    dumpLogs(kCameraLogDir.c_str(), cameraDestDir.c_str(), 5, "high-drop-rate-");
-    dumpLogs(kCameraLogDir.c_str(), cameraDestDir.c_str(), 5, "watchdog-");
-    dumpLogs(kCameraLogDir.c_str(), cameraDestDir.c_str(), 5, "camera-ended-");
-
+  if (!::android::base::GetBoolProperty(
+          "vendor.camera.debug.camera_performance_analyzer.attach_to_bugreport",
+          true)) {
     return 0;
-}
+  }
 
+  const std::string cameraDestDir =
+      concatenatePath(BUGREPORT_PACKING_DIR, "camera");
+
+  if (mkdir(cameraDestDir.c_str(), 0777) == -1) {
+    printf("Unable to create folder: %s\n", cameraDestDir.c_str());
+    return 0;
+  }
+
+  // Attach multiple latest sessions (in case the user is running concurrent
+  // sessions or starts a new session after the one with performance issues).
+  dumpLogs(kCameraLogDir.data(), cameraDestDir.c_str(), 10, "session-ended-");
+  dumpLogs(kCameraLogDir.data(), cameraDestDir.c_str(), 5, "high-drop-rate-");
+  dumpLogs(kCameraLogDir.data(), cameraDestDir.c_str(), 5, "watchdog-");
+  dumpLogs(kCameraLogDir.data(), cameraDestDir.c_str(), 5, "camera-ended-");
+  dumpLogs(kGraphStateDumpDir.data(), cameraDestDir.c_str(), 5,
+           "hal_graph_state_");
+
+  return 0;
+}
