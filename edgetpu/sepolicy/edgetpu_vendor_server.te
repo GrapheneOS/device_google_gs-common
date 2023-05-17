@@ -29,3 +29,6 @@ allow edgetpu_vendor_server proc_version:file r_file_perms;
 
 # Allow EdgeTPU vendor service to read the overcommit_memory info.
 allow edgetpu_vendor_server proc_overcommit_memory:file r_file_perms;
+
+# Allow EdgeTPU vendor service to read hetero runtime properties
+get_prop(edgetpu_vendor_server, vendor_hetero_runtime_prop)
