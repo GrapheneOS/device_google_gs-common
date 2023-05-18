@@ -45,3 +45,5 @@ userdebug_or_eng(`perfetto_producer(edgetpu_dba_server)')
 get_prop(edgetpu_dba_server, vendor_tflite_delegate_prop)
 # Allow EdgeTPU DBA service to read hetero runtime properties
 get_prop(edgetpu_dba_server, vendor_hetero_runtime_prop)
+# Allow EdgeTPU DBA service to read EdgeTPU CPU scheduler properties
+get_prop(edgetpu_dba_server, vendor_edgetpu_cpu_scheduler_prop)
