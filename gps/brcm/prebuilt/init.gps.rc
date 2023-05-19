@@ -24,8 +24,3 @@ service gnss_service /vendor/bin/hw/android.hardware.gnss@2.1-service-brcm
     ioprio be 0
     priority -1
 
-# disable gps service if no gps h/w
-on property:vendor.ril.cbd.svc=0
-    stop gpsd
-    stop lhd
-    stop scd
