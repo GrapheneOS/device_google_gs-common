@@ -1,4 +1,4 @@
-<compatibility-matrix version="1.0" type="framework" level="7">
+<compatibility-matrix version="1.0" type="framework">
     <hal format="aidl" optional="true">
         <name>hardware.google.ril_ext</name>
         <version>1</version>
