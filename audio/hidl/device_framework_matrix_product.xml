@@ -1,4 +1,4 @@
-<compatibility-matrix version="1.0" type="framework" level="7">
+<compatibility-matrix version="1.0" type="framework">
     <hal format="hidl">
        <name>vendor.google.whitechapel.audio.audioext</name>
        <version>4.0</version>
