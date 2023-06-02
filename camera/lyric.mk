@@ -1,7 +1,5 @@
 PRODUCT_SOONG_NAMESPACES += \
-    hardware/google/camera \
-    vendor/google/services/LyricCameraHAL/src \
-    vendor/google/services/LyricCameraHAL/src/apex
+    hardware/google/camera
 
 $(call soong_config_set,lyric,use_lyric_camera_hal,true)
 $(call soong_config_set,google3a_config,gcam_awb,true)
