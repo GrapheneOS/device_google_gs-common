@@ -15,15 +15,8 @@ cc_prebuilt_library_shared {
             srcs: ["android.hardware.gnss@2.1-impl-google.so"],
             shared_libs: [
                 "liblog",
-                "libhidlbase",
-                // "libhidltransport",
                 "libutils",
-                "android.hardware.gnss@1.0",
-                "android.hardware.gnss@1.1",
-                "android.hardware.gnss@2.0",
-                "android.hardware.gnss@2.1",
-                "android.hardware.gnss.measurement_corrections@1.0",
-                "android.hardware.gnss.visibility_control@1.0",
+                "libbinder_ndk",
                 "android.hardware.gnss-V3-ndk",
                 "libhardware",
                 "libc++",
@@ -53,12 +46,8 @@ cc_prebuilt_binary {
                 "liblog",
                 "libutils",
                 "libhardware",
-                "android.hardware.gnss@1.0",
                 "libhidlbase",
-                // "libhidltransport",
-                // "libhwbinder",
-                "android.hardware.gnss@1.1",
-                "android.hardware.gnss@2.0",
+                "libbinder_ndk",
                 "android.hardware.gnss@2.1",
                 "android.hardware.gnss-V3-ndk",
                 "libc++",
@@ -178,8 +167,6 @@ cc_prebuilt_binary {
                 "libc",
                 "libm",
                 "libz",
-                "android.hardware.contexthub@1.0",
-                "libhidlbase",
                 "libdl",
             ],
         },
@@ -198,7 +185,7 @@ cc_prebuilt_binary {
         arm64: {
             srcs: ["scd"],
             shared_libs: [
-	        "liblog",
+                "liblog",
                 "libutils",
                 "libssl",
                 "libcrypto",
@@ -214,10 +201,30 @@ cc_prebuilt_binary {
     },
 }
 
-prebuilt_firmware {
+soong_config_module_type {
+    name: "gps_prebuilt_firmware",
+    module_type: "prebuilt_firmware",
+    config_namespace: "SensorHub_debug",
+    bool_variables: [
+        "assertion",
+    ],
+    properties: [
+        "src"
+    ],
+}
+
+gps_prebuilt_firmware {
     name: "SensorHub.patch",
-    src: "SensorHub.patch",
+    soong_config_variables: {
+        assertion: {
+            src: "SensorHub_DebugBuild_A0.patch",
+            conditions_default: {
+                src: "SensorHub_A0.patch"
+            },
+        },
+    },
     vendor: true,
+    filename: "SensorHub.patch"
 }
 
 phony {
