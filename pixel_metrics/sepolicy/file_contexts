@@ -1,1 +1,1 @@
-/vendor/bin/dump/dump_pixel_metrics\.sh      u:object_r:dump_pixel_metrics_exec:s0
+/vendor/bin/dump/dump_pixel_metrics      u:object_r:dump_pixel_metrics_exec:s0
