@@ -11,4 +11,5 @@ genfscon sysfs /devices/platform/audiometrics/hwinfo_part_number            u:ob
 genfscon sysfs /devices/platform/audiometrics/ams_rate_read_once            u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/cca_rate_read_once            u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/pdm_state                     u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/waves                         u:object_r:sysfs_pixelstats:s0
 
