@@ -2,9 +2,19 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-sh_binary {
-    name: "dump_pixel_metrics.sh",
-    src: "dump_pixel_metrics.sh",
+cc_binary {
+    name: "dump_pixel_metrics",
+    srcs: ["dump_pixel_metrics.cpp"],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libbase",
+	    "libdump",
+	    "liblog",
+    ],
     vendor: true,
-    sub_dir: "dump",
+    relative_install_path: "dump",
 }
