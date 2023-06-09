@@ -13,6 +13,10 @@ allow hal_audio_default amcs_device:file rw_file_perms;
 allow hal_audio_default amcs_device:chr_file rw_file_perms;
 allow hal_audio_default sysfs_pixelstats:file rw_file_perms;
 
+#allow access to aoc and kernel boottime
+allow hal_audio_default sysfs_aoc:dir { search };
+allow hal_audio_default sysfs_aoc_boottime:file r_file_perms;
+
 #allow access to DMABUF Heaps for AAudio API
 allow hal_audio_default dmabuf_heap_device:chr_file r_file_perms;
 
