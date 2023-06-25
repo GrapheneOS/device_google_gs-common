@@ -37,5 +37,6 @@ int main() {
     runCommand("AoC Heap Stats (HF0)", "echo 'dbg heap -c 3' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
     runCommand("AoC Heap Stats (HF1)", "echo 'dbg heap -c 4' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
     runCommand("AoC DVFS (FF1)", "echo 'dbg info -c 2 DVFSFF1' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
+    runCommand("AoC Monitor Mode Status", "echo 'monitor_mode status' > /dev/acd-debug; timeout 0.1 cat /dev/acd-debug");
     return 0;
 }
