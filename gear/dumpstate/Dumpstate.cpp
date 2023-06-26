@@ -74,21 +74,21 @@ void endSection(int fd, const std::string &sectionName, timepoint_t startTime) {
 void Dumpstate::dumpTextSection(int fd, const std::string &sectionName) {
     bool dumpAll = (sectionName == kAllSections);
     std::string dumpFiles;
-
-    // Execute all or designated programs under vendor/bin/dump/
-    std::unique_ptr<DIR, decltype(&closedir)> dir(opendir("/vendor/bin/dump"), closedir);
-    if (!dir) {
-        ALOGE("Fail To Open Dir vendor/bin/dump/");
-        ::android::base::WriteStringToFd("Fail To Open Dir vendor/bin/dump/\n", fd);
+    struct dirent **dirent_list = NULL;
+    int num_entries = scandir("/vendor/bin/dump", &dirent_list, 0, (int (*)(const struct dirent **, const struct dirent **)) alphasort);
+    if (!dirent_list) {
+        ALOGE("Unable to scan dir: /vendor/bin/dump\n");
+        return;
+    } else if (num_entries <= 0) {
+        ALOGE("No file is found.\n");
         return;
     }
-    dirent *entry;
-    while ((entry = readdir(dir.get())) != nullptr) {
-        // Skip '.', '..'
-        if (entry->d_name[0] == '.') {
+    // Execute all or designated programs under vendor/bin/dump/
+    for (int i = 0; i <  num_entries; i++) {
+        if (dirent_list[i]->d_name[0] == '.') {
             continue;
         }
-        std::string bin(entry->d_name);
+        std::string bin(dirent_list[i]->d_name);
         dumpFiles = dumpFiles + " " + bin;
         if (dumpAll || sectionName == bin) {
             auto startTime = startSection(fd, bin);
@@ -111,6 +111,10 @@ void Dumpstate::dumpTextSection(int fd, const std::string &sectionName) {
     ::android::base::WriteStringToFd(dumpFiles, fd);
     ::android::base::WriteStringToFd("\nNote: sections with attachments (e.g. dump_soc) are"
                                    "not available from the command line.\n", fd);
+    while (num_entries--) {
+        free(dirent_list[num_entries]);
+    }
+    free(dirent_list);
 }
 
 void Dumpstate::dumpLogSection(int fd, int fd_bin)
