@@ -49,5 +49,8 @@ PRODUCT_PACKAGES += com.google.pixel.camera.hal
 PRODUCT_PACKAGES += init.camera.set-interrupts-ownership
 PRODUCT_PACKAGES += lyric_preview_dis_xml
 
+DEVICE_PRODUCT_COMPATIBILITY_MATRIX_FILE += \
+    device/google/gs-common/camera/device_framework_matrix_product.xml
+
 # sepolicy dir is added in dump.mk.
 # Make doesn't deduplicate sepolicy dirs, so including it here causes build errors.
