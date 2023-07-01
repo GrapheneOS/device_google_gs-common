@@ -28,6 +28,7 @@ PRODUCT_SOONG_NAMESPACES += \
 # code coverage support, temporary require separate namespace for folders that
 # can be built successfully.
 PRODUCT_SOONG_NAMESPACES += \
+    vendor/google/camera/common/g3_shared \
     vendor/google/camera/google_3a/libs_v4/g3ABase \
     vendor/google/camera/google_3a/libs_v4/gABC/native_coverage \
     vendor/google/camera/google_3a/libs_v4/gAF \
