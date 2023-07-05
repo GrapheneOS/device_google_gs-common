@@ -2,7 +2,8 @@ DEVICE_MANIFEST_FILE += device/google/gs-common/audio/aidl/manifest.xml
 
 # Audio HALs
 PRODUCT_PACKAGES += \
-    android.hardware.audio.service-aidl.aoc
+    android.hardware.audio.service-aidl.aoc \
+    vendor.google.whitechapel.audio.hal.parserservice \
 
 # AIDL software effects. These are the effects supporting in all projects.
 # For the project-specific effects, such as haptic generator, please add them
