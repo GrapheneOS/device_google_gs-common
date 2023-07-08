@@ -1,0 +1,1 @@
+genfscon proc /sys/kernel/sched_pelt_multiplier u:object_r:proc_sched:s0

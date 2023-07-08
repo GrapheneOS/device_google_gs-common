@@ -1,0 +1,2 @@
+# Pixel PeristentBackgroundCameraServices
+user=system seinfo=platform name=com.google.pixel.camera.services domain=vendor_pbcs_app type=system_app_data_file levelFrom=all
