@@ -21,17 +21,17 @@
 
 int main() {
     /* TODO(b/277094681): Set default value to false around device beta milestone. */
-    if(::android::base::GetBoolProperty("vendor.gxp.attach_to_bugreport", true)) {
-        std::string outputDir = concatenatePath(BUGREPORT_PACKING_DIR, "gxp_ssrdump");
-        printf("Creating %s", outputDir.c_str());
-        if (mkdir(outputDir.c_str(), 0777) == -1) {
-            printf("Unable to create folder: %s\n", outputDir.c_str());
-            return 0;
-        }
-
-        dumpLogs("/data/vendor/ssrdump/coredump", outputDir.c_str(), maxGxpDebugDumps, "coredump_gxp_");
-        dumpLogs("/data/vendor/ssrdump", outputDir.c_str(), maxGxpDebugDumps, "crashinfo_gxp_");
+    /* TODO(b/288368306): Create an android property for enabling/disabling
+     * bugreport collection for gxp */
+    std::string outputDir = concatenatePath(BUGREPORT_PACKING_DIR, "gxp_ssrdump");
+    printf("Creating %s", outputDir.c_str());
+    if (mkdir(outputDir.c_str(), 0777) == -1) {
+        printf("Unable to create folder: %s\n", outputDir.c_str());
+        return 0;
     }
+
+    dumpLogs("/data/vendor/ssrdump/coredump", outputDir.c_str(), maxGxpDebugDumps, "coredump_gxp_");
+    dumpLogs("/data/vendor/ssrdump", outputDir.c_str(), maxGxpDebugDumps, "crashinfo_gxp_");
     return 0;
 }
 
