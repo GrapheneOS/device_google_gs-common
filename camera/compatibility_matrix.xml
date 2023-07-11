@@ -1,0 +1,13 @@
+<compatibility-matrix version="1.0" type="device">
+    <hal format="aidl" optional="true">
+        <name>com.google.pixel.camera.services.binder</name>
+        <version>1</version>
+        <interface>
+            <name>IServiceBinder</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+    <vndk>
+        <version>0.0.0</version>
+    </vndk>
+</compatibility-matrix>
