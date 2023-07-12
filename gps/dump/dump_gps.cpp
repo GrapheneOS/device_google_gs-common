@@ -26,6 +26,8 @@
 #define GPS_MALLOC_LOG_DIRECTORY "/data/vendor/gps"
 #define GPS_MALLOC_LOG_PREFIX "malloc_"
 #define GPS_VENDOR_CHIP_INFO "/data/vendor/gps/chip.info"
+#define GPS_RAWLOG_PREFIX "rawbin"
+#define GPS_MEMDUMP_LOG_PREFIX "memdump_"
 
 int main() {
     if(!::android::base::GetBoolProperty("vendor.gps.aol.enabled", false)) {
@@ -46,6 +48,8 @@ int main() {
     if (access(GPS_VENDOR_CHIP_INFO, F_OK) == 0) {
         copyFile(GPS_VENDOR_CHIP_INFO, concatenatePath(outputDir.c_str(), "chip.info").c_str());
     }
+    dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), maxFileNum, GPS_RAWLOG_PREFIX);
+    dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), 18, GPS_MEMDUMP_LOG_PREFIX);
     return 0;
 }
 
