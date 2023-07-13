@@ -1,2 +1,3 @@
 # Audio Hal AIDL Service for Aoc
 /vendor/bin/hw/android\.hardware\.audio\.service-aidl\.aoc                  u:object_r:hal_audio_default_exec:s0
+/system_ext/bin/hw/vendor\.google\.whitechapel\.audio\.hal\.parserservice   u:object_r:hal_audio_parameter_parser_exec:s0
