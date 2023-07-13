@@ -2,4 +2,10 @@ type vendor_pbcs_app, domain, coredomain;
 
 app_domain(vendor_pbcs_app);
 
+allow vendor_pbcs_app system_app_data_file:dir search;
+
 allow vendor_pbcs_app app_api_service:service_manager find;
+
+allow vendor_pbcs_app vendor_camera_binder_service:service_manager add;
+
+binder_call(vendor_pbcs_app, hal_camera_default);
