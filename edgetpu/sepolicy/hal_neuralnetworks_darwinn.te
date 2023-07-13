@@ -7,7 +7,7 @@ init_daemon_domain(hal_neuralnetworks_darwinn)
 # The TPU HAL looks for TPU instance in /dev/abrolhos
 allow hal_neuralnetworks_darwinn edgetpu_device:chr_file rw_file_perms;
 
-# Allow DawriNN service to use a client-provided fd residing in /vendor/etc/.
+# Allow DarwiNN service to use a client-provided fd residing in /vendor/etc/.
 allow hal_neuralnetworks_darwinn vendor_configs_file:file r_file_perms;
 
 # Allow DarwiNN service to access data files.
