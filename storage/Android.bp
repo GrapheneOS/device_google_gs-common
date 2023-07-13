@@ -2,9 +2,19 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-sh_binary {
-    name: "dump_storage.sh",
-    src: "dump_storage.sh",
+cc_binary {
+    name: "dump_storage",
+    srcs: ["dump_storage.cpp"],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libbase",
+        "libdump",
+	"liblog",
+    ],
     vendor: true,
-    sub_dir: "dump",
+    relative_install_path: "dump",
 }
