@@ -30,9 +30,11 @@ PRODUCT_PACKAGES += \
 	audio.bluetooth.default \
 	audio.r_submix.default \
 	audio_spk_35l41 \
+	audio_hdmi_aoc \
 	sound_trigger.primary.$(TARGET_BOARD_PLATFORM)
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/audio/sepolicy/hidl
+BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/audio/sepolicy/hdmi_audio
 
 include device/google/gs-common/audio/common.mk
 

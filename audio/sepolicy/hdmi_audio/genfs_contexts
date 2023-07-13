@@ -1,0 +1,1 @@
+genfscon sysfs /devices/platform/drmdp-adma/extcon/hdmi_audio                 u:object_r:sysfs_extcon:s0
