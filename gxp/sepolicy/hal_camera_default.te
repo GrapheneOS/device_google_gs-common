@@ -1,0 +1,3 @@
+# Allow the camera hal to access the GXP device and Properties.
+allow hal_camera_default gxp_device:chr_file rw_file_perms;
+get_prop(hal_camera_default, vendor_gxp_prop)

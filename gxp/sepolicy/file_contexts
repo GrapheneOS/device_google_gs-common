@@ -1,2 +1,12 @@
-/vendor/bin/dump/dump_gxp           u:object_r:dump_gxp_exec:s0
+# GXP Vendor library
+/vendor/lib(64)?/libgxp\.so                                                 u:object_r:same_process_hal_file:s0
+
+# GXP logging service
+/vendor/bin/hw/android\.hardware\.gxp\.logging@service-gxp-logging          u:object_r:gxp_logging_exec:s0
+
+# GXP Metrics Collection Library
+/vendor/lib(64)?/gxp_metrics_logger\.so                                     u:object_r:same_process_hal_file:s0
+
+# Allow collection of debug dump.
+/vendor/bin/dump/dump_gxp                                                   u:object_r:dump_gxp_exec:s0
 

@@ -1,0 +1,3 @@
+# Gxp Android Properties.
+set_prop(vendor_init, vendor_gxp_prop)
+
