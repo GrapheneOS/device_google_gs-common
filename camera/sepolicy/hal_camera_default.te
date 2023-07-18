@@ -1,4 +1,6 @@
 allow hal_camera_default vendor_camera_binder_service:service_manager find;
+# Allow Lyric Hal to find the LyricConfigProvider service through ServiceManager.
+allow hal_camera_default vendor_camera_lyricconfigprovider_service:service_manager find;
 
 allow hal_camera_default hal_pixel_remote_camera_service:service_manager find;
 
