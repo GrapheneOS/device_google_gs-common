@@ -1,0 +1,7 @@
+type vendor_pcs_app, domain, coredomain;
+
+app_domain(vendor_pcs_app);
+
+allow vendor_pcs_app app_api_service:service_manager find;
+
+allow vendor_pcs_app cameraserver_service:service_manager find;
