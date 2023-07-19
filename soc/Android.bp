@@ -2,11 +2,21 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
-sh_binary {
-    name: "dump_memory.sh",
-    src: "dump_memory.sh",
+cc_binary {
+    name: "dump_memory",
+    srcs: ["dump_memory.cpp"],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libbase",
+	"libdump",
+	"liblog",
+    ],
     vendor: true,
-    sub_dir: "dump",
+    relative_install_path: "dump",
 }
 
 cc_binary {
