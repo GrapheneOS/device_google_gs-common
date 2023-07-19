@@ -2,7 +2,7 @@ type vendor_pbcs_app, domain, coredomain;
 
 app_domain(vendor_pbcs_app);
 
-allow vendor_pbcs_app system_app_data_file:dir search;
+dontaudit vendor_pbcs_app system_app_data_file:dir *;
 
 allow vendor_pbcs_app app_api_service:service_manager find;
 
