@@ -6,6 +6,9 @@ dontaudit vendor_pbcs_app system_app_data_file:dir *;
 
 allow vendor_pbcs_app app_api_service:service_manager find;
 
-allow vendor_pbcs_app vendor_camera_binder_service:service_manager add;
+# Allow PBCS to add the ServiceBinder service to ServiceManager.
+add_service(vendor_pbcs_app, vendor_camera_binder_service);
+# Allow PBCS to add the LyricConfigProvider service to ServiceManager.
+add_service(vendor_pbcs_app, vendor_camera_lyricconfigprovider_service);
 
 binder_call(vendor_pbcs_app, hal_camera_default);
