@@ -1,0 +1,4 @@
+com.google.armnn.IArmnnVendorService/default             u:object_r:armnn_vendor_service:s0
+android.hardware.neuralnetworks.IDevice/google-armnn     u:object_r:armnn_nnapi_service:s0
+com.google.armnn.IArmnnpAppService/default               u:object_r:armnn_app_service:s0
+
