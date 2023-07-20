@@ -1,0 +1,3 @@
+allow priv_app armnn_app_service:service_manager find;
+allow priv_app armnn_nnapi_service:service_manager find;
+

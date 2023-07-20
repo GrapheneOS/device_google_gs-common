@@ -1,0 +1,18 @@
+type hal_neuralnetworks_armnn, domain;
+hal_server_domain(hal_neuralnetworks_armnn, hal_neuralnetworks)
+
+type hal_neuralnetworks_armnn_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(hal_neuralnetworks_armnn)
+
+add_service(hal_neuralnetworks_armnn, armnn_nnapi_service);
+
+allow hal_neuralnetworks_armnn armnn_app_service:service_manager find;
+
+get_prop(hal_neuralnetworks_armnn, hwservicemanager_prop)
+
+allow isolated_app app_data_file:file setattr;
+
+allow hal_neuralnetworks_armnn fwk_stats_service:service_manager find;
+binder_call(hal_neuralnetworks_armnn, system_server);
+binder_use(hal_neuralnetworks_armnn)
+
