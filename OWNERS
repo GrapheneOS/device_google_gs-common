@@ -14,5 +14,6 @@ lokeshgoel@google.com
 jainne@google.com
 pscovanner@google.com
 
+per-file *.te,*_contexts,te_macros,global_macros=set noparent
 per-file *.te,*_contexts,te_macros,global_macros=file:/sepolicy/OWNERS
 
