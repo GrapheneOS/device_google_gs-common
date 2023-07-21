@@ -1,2 +1,4 @@
 vendor.camera.debug.       u:object_r:vendor_camera_debug_prop:s0
+persist.vendor.camera.pbcs.debug.       u:object_r:vendor_camera_pbcs_debug_prop:s0
+vendor.camera.pbcs.debug.       u:object_r:vendor_camera_pbcs_debug_prop:s0
 
