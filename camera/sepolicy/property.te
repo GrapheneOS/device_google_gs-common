@@ -1,2 +1,3 @@
 vendor_internal_prop(vendor_camera_debug_prop)
+system_vendor_config_prop(vendor_camera_pbcs_debug_prop)
 
