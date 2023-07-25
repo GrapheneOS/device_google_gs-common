@@ -6,6 +6,9 @@ allow vendor_pcs_app app_api_service:service_manager find;
 
 allow vendor_pcs_app cameraserver_service:service_manager find;
 
+# Allow PCS to find the LyricConfigProvider service through ServiceManager.
+allow vendor_pcs_app vendor_camera_lyricconfigprovider_service:service_manager find;
+
 allow vendor_pcs_app hal_pixel_remote_camera_service:service_manager add;
 
 binder_call(vendor_pcs_app, hal_pixel_remote_camera_service);
