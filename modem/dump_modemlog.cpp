@@ -13,52 +13,61 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <dump/pixel_dump.h>
 #include <android-base/properties.h>
-#include <log/log.h>
+#include <dump/pixel_dump.h>
 
-#define MODEM_LOGGING_PERSIST_PROPERTY "persist.vendor.sys.modem.logging.enable"
-#define MODEM_LOGGING_PROPERTY "vendor.sys.modem.logging.enable"
-#define MODEM_LOGGING_STATUS_PROPERTY "vendor.sys.modem.logging.status"
-#define MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY "persist.vendor.sys.modem.logging.br_num"
-#define MODEM_LOGGING_PATH_PROPERTY "vendor.sys.modem.logging.log_path"
-#define MODEM_SIM_DIRECTORY "/data/vendor/radio/sim/"
-#define MODEM_LOG_PREFIX "sbuff_"
-#define SIM_POWERON_LOG_PREFIX "sim_poweron_log_"
+#include "dumper.h"
+#include "modem_log_dumper.h"
+
+namespace modem {
+namespace logging {
+
+/**
+ * @brief Implementation of AndroidPropertyManager that directly forwards to
+ * android base methods.
+ */
+class AndroidPropertyManagerImpl : public AndroidPropertyManager {
+ public:
+  bool GetBoolProperty(const std::string& key, bool default_value) override {
+    return android::base::GetBoolProperty(key, default_value);
+  };
+
+  std::string GetProperty(const std::string& key,
+                          const std::string& default_value) override {
+    return android::base::GetProperty(key, default_value);
+  };
+  int GetIntProperty(const std::string& key, int default_value) override {
+    return android::base::GetIntProperty(key, default_value);
+  };
+  void SetProperty(const std::string& key, const std::string& value) override {
+    android::base::SetProperty(key, value);
+  };
+};
+
+/**
+ * @brief Implementation of Dumper that directly forwards to their corresponding
+ * dumpstate methods.
+ */
+class DumperImpl : public Dumper {
+ public:
+  void DumpLogs(const LogDumpInfo& log_dump_info) override {
+    dumpLogs(log_dump_info.src_dir.data(), log_dump_info.dest_dir.data(),
+             log_dump_info.limit, log_dump_info.prefix.data());
+  }
+  void CopyFile(const FileCopyInfo& file_copy_info) override {
+    copyFile(file_copy_info.src_dir.data(), file_copy_info.dest_dir.data());
+  }
+};
+
+}  // namespace logging
+}  // namespace modem
 
 int main() {
-    bool modemLogEnabled = ::android::base::GetBoolProperty(MODEM_LOGGING_PERSIST_PROPERTY, false);
-    if (modemLogEnabled && ::android::base::GetProperty(MODEM_LOGGING_PATH_PROPERTY, "") == MODEM_LOG_DIRECTORY) {
-        bool modemLogStarted = ::android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false);
-        int maxFileNum = ::android::base::GetIntProperty(MODEM_LOGGING_NUMBER_BUGREPORT_PROPERTY, 100);
+  modem::logging::DumperImpl dumper_impl;
+  modem::logging::AndroidPropertyManagerImpl android_property_manager_impl;
+  modem::logging::ModemLogDumper modem_log_dumper(
+      dumper_impl, android_property_manager_impl);
 
-        if (modemLogStarted) {
-            ::android::base::SetProperty(MODEM_LOGGING_PROPERTY, "false");
-            ALOGD("Stopping modem logging...\n");
-        } else {
-            ALOGD("modem logging is not running\n");
-        }
-
-        for (int i = 0; i < 15; i++) {
-            if (!::android::base::GetBoolProperty(MODEM_LOGGING_STATUS_PROPERTY, false)) {
-                ALOGD("modem logging stopped\n");
-                sleep(1);
-                break;
-            }
-            sleep(1);
-        }
-
-        dumpLogs(MODEM_LOG_DIRECTORY, BUGREPORT_PACKING_DIR, maxFileNum, MODEM_LOG_PREFIX);
-
-        if (modemLogStarted) {
-            ALOGD("Restarting modem logging...\n");
-            ::android::base::SetProperty(MODEM_LOGGING_PROPERTY, "true");
-        }
-    }
-
-    dumpLogs("/data/vendor/radio/extended_logs", BUGREPORT_PACKING_DIR, 20, "extended_log_");
-    dumpLogs(MODEM_SIM_DIRECTORY, BUGREPORT_PACKING_DIR, 1, SIM_POWERON_LOG_PREFIX);
-    copyFile("/mnt/vendor/efs/nv_normal.bin", "/data/vendor/radio/logs/always-on/all_logs/nv_normal.bin");
-    copyFile("/mnt/vendor/efs/nv_protected.bin", "/data/vendor/radio/logs/always-on/all_logs/nv_protected.bin");
-    return 0;
+  modem_log_dumper.DumpModemLogs();
+  return 0;
 }
