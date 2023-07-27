@@ -9,6 +9,13 @@ sh_binary {
     sub_dir: "dump",
 }
 
+cc_defaults {
+    name: "dump_modemlog_defaults",
+    srcs: ["modem_log_dumper.cpp"],
+    local_include_dirs: ["include"],
+    shared_libs: ["liblog"],
+}
+
 cc_binary {
     name: "dump_modemlog",
     srcs: ["dump_modemlog.cpp"],
@@ -22,7 +29,16 @@ cc_binary {
         "libdump",
         "liblog",
     ],
+    defaults: ["dump_modemlog_defaults"],
     vendor: true,
     relative_install_path: "dump",
 }
 
+cc_test {
+    name: "dump_modemlog_test",
+    srcs: ["test/*.cpp"],
+    defaults: ["dump_modemlog_defaults"],
+    local_include_dirs: ["test/include"],
+    static_libs: ["libgmock"],
+    vendor: true,
+}
