@@ -1,5 +1,5 @@
 #!/vendor/bin/sh
-path="/sys/devices/platform/10d10000.spi/spi_master/spi0/spi0.0/synaptics_tcm.0/sysfs"
+path=`getprop ro.vendor.touch.dump.sys`
 
 echo "Enable Force Touch Active"
 echo 21 > $path/force_active
