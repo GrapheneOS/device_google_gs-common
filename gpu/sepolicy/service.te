@@ -1,5 +1,0 @@
-type armnn_nnapi_service, app_api_service, service_manager_type, isolated_compute_allowed_service;
-type armnn_vendor_service, service_manager_type, hal_service_type;
-type armnn_dba_service, app_api_service, service_manager_type, isolated_compute_allowed_service;
-type armnn_app_service, service_manager_type;
-
