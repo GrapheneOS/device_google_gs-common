@@ -5,6 +5,7 @@ package {
 cc_binary {
     name: "dump_storage",
     srcs: ["dump_storage.cpp"],
+    init_rc: ["init.storage.rc"],
     cflags: [
         "-Wall",
         "-Wextra",
