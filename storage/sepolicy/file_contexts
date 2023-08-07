@@ -1,1 +1,2 @@
 /vendor/bin/dump/dump_storage\.sh      u:object_r:dump_storage_exec:s0
+/sys/devices/platform/[0-9]+\.ufs/pixel/enable_pixel_ufs_logging  u:object_r:sysfs_scsi_devices_0000:s0

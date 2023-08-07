@@ -5,6 +5,7 @@ package {
 sh_binary {
     name: "dump_storage.sh",
     src: "dump_storage.sh",
+    init_rc: ["init.storage.rc"],
     vendor: true,
     sub_dir: "dump",
 }
