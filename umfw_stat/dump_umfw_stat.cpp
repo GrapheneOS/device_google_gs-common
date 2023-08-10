@@ -26,7 +26,14 @@ int main() {
 
   // Dump AoC statistics.
   // TODO(b/272300997): Add timeouts for requests.
-  runCommand("AoC statistics", "timeout 5 /vendor/bin/umfw_stat_tool get_all");
+  runCommand("AoC A32 statistics",
+             "timeout 5 /vendor/bin/umfw_stat_tool -s aoc:1 get_all");
+  runCommand("AoC FF1 statistics",
+             "timeout 5 /vendor/bin/umfw_stat_tool -s aoc:2 get_all");
+  runCommand("AoC HF0 statistics",
+             "timeout 5 /vendor/bin/umfw_stat_tool -s aoc:3 get_all");
+  runCommand("AoC HF1 statistics",
+             "timeout 5 /vendor/bin/umfw_stat_tool -s aoc:4 get_all");
 
   return 0;
 }
