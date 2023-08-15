@@ -14,9 +14,3 @@ bkhalife@google.com
 lokeshgoel@google.com
 jainne@google.com
 pscovanner@google.com
-
-per-file *.te=file://sepolicy/OWNERS
-per-file *_contexts=file://sepolicy/OWNERS
-per-file te_macros=file://sepolicy/OWNERS
-per-file global_macros=file://sepolicy/OWNERS
-
