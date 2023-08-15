@@ -2,9 +2,14 @@ type vendor_pcs_app, domain, coredomain;
 
 app_domain(vendor_pcs_app);
 
-allow vendor_pcs_app app_api_service:service_manager find;
-
-allow vendor_pcs_app cameraserver_service:service_manager find;
+allow vendor_pcs_app {
+    app_api_service
+    audioserver_service
+    cameraserver_service
+    mediametrics_service
+    mediaserver_service
+    radio_service
+}:service_manager find;
 
 # Allow PCS to find the LyricConfigProvider service through ServiceManager.
 allow vendor_pcs_app vendor_camera_lyricconfigprovider_service:service_manager find;
@@ -12,5 +17,7 @@ allow vendor_pcs_app vendor_camera_lyricconfigprovider_service:service_manager f
 allow vendor_pcs_app vendor_camera_cameraidremapper_service:service_manager find;
 
 allow vendor_pcs_app hal_pixel_remote_camera_service:service_manager add;
+
+binder_call(vendor_pcs_app, hal_camera_default);
 
 binder_call(vendor_pcs_app, hal_pixel_remote_camera_service);
