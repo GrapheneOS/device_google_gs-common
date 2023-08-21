@@ -1,5 +1,8 @@
 type vendor_pbcs_app, domain, coredomain;
 
+# TODO(b/296512192): move vendor_pbcs_app out of vendor sepolicy
+typeattribute vendor_pbcs_app vendor_seapp_assigns_coredomain_violators;
+
 app_domain(vendor_pbcs_app);
 
 dontaudit vendor_pbcs_app system_app_data_file:dir *;
