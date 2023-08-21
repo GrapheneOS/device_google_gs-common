@@ -1,2 +1,0 @@
-# Pixel System Service
-user=_app seinfo=platform name=com.google.android.pixelsystemservice domain=pixelsystemservice_app type=app_data_file levelFrom=all
