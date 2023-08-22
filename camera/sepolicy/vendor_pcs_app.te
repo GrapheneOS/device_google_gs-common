@@ -1,5 +1,8 @@
 type vendor_pcs_app, domain, coredomain;
 
+# TODO(b/296512192): move vendor_pcs_app out of vendor sepolicy
+typeattribute vendor_pcs_app vendor_seapp_assigns_coredomain_violators;
+
 app_domain(vendor_pcs_app);
 
 allow vendor_pcs_app {
