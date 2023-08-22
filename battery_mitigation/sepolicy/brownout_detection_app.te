@@ -1,5 +1,8 @@
 type brownout_detection_app, domain, coredomain;
 
+# TODO(b/296512192): move brownout_detection_app out of vendor sepolicy
+typeattribute brownout_detection_app vendor_seapp_assigns_coredomain_violators;
+
 userdebug_or_eng(`
   app_domain(brownout_detection_app)
   net_domain(brownout_detection_app)
