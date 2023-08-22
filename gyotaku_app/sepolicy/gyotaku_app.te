@@ -1,0 +1,34 @@
+type gyotaku_app, domain;
+
+app_domain(gyotaku_app)
+
+userdebug_or_eng(`
+  # For Gyotaku app common use
+  allow gyotaku_app app_api_service:service_manager find;
+  allow gyotaku_app privapp_data_file:lnk_file read;
+  allow gyotaku_app gyotaku_app:udp_socket create;
+  allow gyotaku_app system_app_data_file:dir create_dir_perms;
+  allow gyotaku_app system_app_data_file:file create_file_perms;
+
+  # For cloud and network related use
+  allow gyotaku_app dnsproxyd_socket:sock_file write;
+  allow gyotaku_app gyotaku_app:udp_socket connect;
+  allow gyotaku_app netd:unix_stream_socket connectto;
+  allow gyotaku_app gyotaku_app:tcp_socket create;
+  allow gyotaku_app privapp_data_file:file execute;
+  allow netd gyotaku_app:fd use;
+  allow netd gyotaku_app:tcp_socket {read write};
+
+  # For access /proc/fs/f2fs/* storage use
+  allow gyotaku_app proc_f2fs:dir search;
+  allow gyotaku_app proc_f2fs:file {open read};
+
+  # For access /proc/stat use
+  allow gyotaku_app proc_stat:file {read open getattr};
+
+  # For getproperty isDebuggable use
+  get_prop(gyotaku_app, userdebug_or_eng_prop)
+
+  # For persiste property use
+  allow gyotaku_app logpersistd_logging_prop:file {read open getattr map};
+')
