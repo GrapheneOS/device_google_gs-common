@@ -16,3 +16,4 @@ genfscon sysfs /devices/platform/audiometrics/adapted_info_active_count     u:ob
 genfscon sysfs /devices/platform/audiometrics/adapted_info_active_duration  u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/pcm_count                     u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/pcm_latency                   u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /sys/devices/platform/audiometrics/call_count                u:object_r:sysfs_pixelstats:s0
