@@ -9,3 +9,6 @@ vndbinder_use(hal_weaver_citadel)
 binder_call(hal_weaver_citadel, citadeld)
 
 allow hal_weaver_citadel citadeld_service:service_manager find;
+
+# Allow callbacks
+allow citadeld hal_weaver_citadel:binder call;
