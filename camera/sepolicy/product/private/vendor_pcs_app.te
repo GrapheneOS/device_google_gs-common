@@ -1,0 +1,12 @@
+typeattribute vendor_pcs_app coredomain;
+
+app_domain(vendor_pcs_app);
+
+allow vendor_pcs_app {
+    app_api_service
+    audioserver_service
+    cameraserver_service
+    mediametrics_service
+    mediaserver_service
+    radio_service
+}:service_manager find;
