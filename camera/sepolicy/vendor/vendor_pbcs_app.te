@@ -1,16 +1,3 @@
-type vendor_pbcs_app, domain, coredomain;
-
-# TODO(b/296512192): move vendor_pbcs_app out of vendor sepolicy
-typeattribute vendor_pbcs_app vendor_seapp_assigns_coredomain_violators;
-
-app_domain(vendor_pbcs_app);
-
-dontaudit vendor_pbcs_app system_app_data_file:dir *;
-
-allow vendor_pbcs_app app_api_service:service_manager find;
-# Allow PBCS to find Camera Service.
-allow vendor_pbcs_app cameraserver_service:service_manager find;
-
 # Allow PBCS to add the ServiceBinder service to ServiceManager.
 add_service(vendor_pbcs_app, vendor_camera_binder_service);
 # Allow PBCS to add the LyricConfigProvider service to ServiceManager.
@@ -18,8 +5,8 @@ add_service(vendor_pbcs_app, vendor_camera_lyricconfigprovider_service);
 # Allow PBCS to add the CameraIdRemapper service to ServiceManager.
 add_service(vendor_pbcs_app, vendor_camera_cameraidremapper_service);
 
-binder_call(vendor_pbcs_app, hal_camera_default);
-
 # Allow PBCS to read debug system properties of the form vendor.camera.pbcs.debug.*
 # and persist.vendor.camera.pbcs.debug.*
 get_prop(vendor_pbcs_app, vendor_camera_pbcs_debug_prop);
+
+binder_call(vendor_pbcs_app, hal_camera_default);
