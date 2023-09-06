@@ -16,8 +16,10 @@
 
 #define LOG_TAG "battery-mitigation"
 
-#include <battery_mitigation/BatteryMitigation.h>
 #include <android/binder_process.h>
+#include <battery_mitigation/BatteryMitigation.h>
+#include <sys/resource.h>
+#include <system/thread_defs.h>
 
 #define COUNT_LIMIT 10
 
@@ -67,20 +69,56 @@ const struct MitigationConfig::Config cfg = {
     .TimestampFormat = "%Y-%m-%d %H:%M:%S",
 };
 
+const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
+    .NumericSysfsStatPaths = {
+        {"cpu0_freq", "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"},
+        {"cpu1_freq", "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"},
+        {"cpu2_freq", "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"},
+        {"gpu_freq", "/sys/devices/platform/1f000000.mali/cur_freq"},
+        {"battery_temp", "/dev/thermal/tz-by-name/battery/temp"},
+        {"battery_cycle", "/dev/thermal/tz-by-name/battery_cycle/temp"},
+        {"voltage_now", "/sys/class/power_supply/battery/voltage_now"},
+        {"current_now", "/sys/class/power_supply/battery/current_now"},
+    },
+    .NumericSysfsStatDirs = {
+        {"last_triggered_mode", "/sys/devices/virtual/pmic/mitigation/last_triggered_mode/"},
+    },
+    .TriggeredIdxPath = "/sys/devices/virtual/pmic/mitigation/br_stats/triggered_idx",
+    .BrownoutStatsPath = "/sys/devices/virtual/pmic/mitigation/br_stats/stats",
+    .StoringPath = "/data/vendor/mitigation/thismeal.bin",
+    .BackupPath = "/data/vendor/mitigation/lastmeal.bin",
+    .FvpStatsPath = "/sys/devices/platform/acpm_stats/fvp_stats",
+    .PcieModemPath = "/sys/devices/platform/12100000.pcie/power_stats",
+    .PcieWifiPath = "/sys/devices/platform/13120000.pcie/power_stats",
+};
+
 const char kReadyFilePath[] = "/sys/devices/virtual/pmic/mitigation/instruction/ready";
 const char kReadyProperty[] = "vendor.brownout.mitigation.ready";
 const char kLastMealPath[] = "/data/vendor/mitigation/lastmeal.txt";
 const char kBRRequestedProperty[] = "vendor.brownout_reason";
 const char kLastMealProperty[] = "vendor.brownout.br.feasible";
+const char kCDTProperty[] = "ro.boot.cdt_hwid";
 const std::regex kTimestampRegex("^\\S+\\s[0-9]+:[0-9]+:[0-9]+\\S+$");
 
+std::string GetSystemProperty(std::string property) {
+    char value[PROP_VALUE_MAX];
+    __system_property_get(property.c_str(), value);
+    return std::string(value);
+}
+
 int main(int /*argc*/, char ** /*argv*/) {
+    setpriority(PRIO_PROCESS, 0, ANDROID_PRIORITY_AUDIO);
     auto batteryMitigationStartTime = std::chrono::system_clock::now();
     ABinderProcess_setThreadPoolMaxThreadCount(1);
     ABinderProcess_startThreadPool();
-    bmSp = new BatteryMitigation(cfg);
+    bmSp = new BatteryMitigation(cfg, eventThreadCfg);
     if (!bmSp) {
         return 0;
+    }
+    std::string cdt = GetSystemProperty(kCDTProperty);
+    int platform_num  = atoi(cdt.substr(5, 1).c_str());
+    if (platform_num >= MIN_SUPPORTED_PLATFORM) {
+        bmSp->startBrownoutEventThread();
     }
     bool mitigationLogTimeValid = bmSp->isMitigationLogTimeValid(batteryMitigationStartTime,
                                                                  cfg.LogFilePath,
