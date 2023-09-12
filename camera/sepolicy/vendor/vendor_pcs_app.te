@@ -8,3 +8,12 @@ allow vendor_pcs_app hal_pixel_remote_camera_service:service_manager add;
 binder_call(vendor_pcs_app, hal_pixel_remote_camera_service);
 
 binder_call(vendor_pcs_app, hal_camera_default);
+
+# Allow PCS to open socket connections for HTTP streaming support.
+allow vendor_pcs_app vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow vendor_pcs_app fwmarkd_socket:sock_file write;
+allow vendor_pcs_app port:tcp_socket name_connect;
+allow vendor_pcs_app netd:unix_stream_socket connectto;
+
+allow netd vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow netd vendor_pcs_app:fd use;
