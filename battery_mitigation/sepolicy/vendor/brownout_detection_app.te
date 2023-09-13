@@ -1,0 +1,3 @@
+userdebug_or_eng(`
+  get_prop(brownout_detection_app, vendor_brownout_reason_prop)
+')
