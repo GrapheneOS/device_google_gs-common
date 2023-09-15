@@ -23,6 +23,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += com.google.edgetpu.dba-service
 # TPU DBA C API library
 PRODUCT_PACKAGES += libedgetpu_dba.google
+# TPU Tachyon HAL service
+PRODUCT_PACKAGES += com.google.edgetpu.tachyon-service
+# TPU Tachyon C API library
+PRODUCT_PACKAGES += libedgetpu_tachyon.google
 
 BOARD_VENDOR_SEPOLICY_DIRS += device/google/gs-common/edgetpu/sepolicy
 

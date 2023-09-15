@@ -24,3 +24,6 @@
 
 # EdgeTPU DBA service
 /vendor/bin/hw/com\.google\.edgetpu.dba-service                            u:object_r:edgetpu_dba_server_exec:s0
+
+# Tachyon service
+/vendor/bin/hw/com\.google\.edgetpu.tachyon-service                        u:object_r:edgetpu_tachyon_server_exec:s0
