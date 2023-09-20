@@ -1,0 +1,2 @@
+# Gyotaku app
+user=system seinfo=platform name=com.google.android.apps.internal.gyotaku domain=gyotaku_app type=system_app_data_file levelFrom=all

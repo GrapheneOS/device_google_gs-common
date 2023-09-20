@@ -1,0 +1,25 @@
+type gyotaku_app, domain;
+
+userdebug_or_eng(`
+  app_domain(gyotaku_app)
+  net_domain(gyotaku_app)
+
+  # For Gyotaku app common use
+  allow gyotaku_app app_api_service:service_manager find;
+  allow gyotaku_app privapp_data_file:lnk_file read;
+  allow gyotaku_app system_app_data_file:dir create_dir_perms;
+  allow gyotaku_app system_app_data_file:file create_file_perms;
+
+  # For access /proc/fs/f2fs/* storage use
+  allow gyotaku_app proc_f2fs:dir search;
+  allow gyotaku_app proc_f2fs:file r_file_perms;
+
+  # For access /proc/stat use
+  allow gyotaku_app proc_stat:file r_file_perms;
+
+  # For getproperty isDebuggable use
+  get_prop(gyotaku_app, userdebug_or_eng_prop)
+
+  # For persistent property use
+  get_prop(gyotaku_app, logpersistd_logging_prop);
+')
