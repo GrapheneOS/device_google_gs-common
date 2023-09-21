@@ -1,1 +1,0 @@
-genfscon sysfs /devices/virtual/pmic/mitigation                                u:object_r:sysfs_bcl:s0

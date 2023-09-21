@@ -8,3 +8,6 @@ com.google.edgetpu.IEdgeTpuAppService/default              u:object_r:edgetpu_ap
 
 # EdgeTPU DBA Service
 com.google.edgetpu.dba.IDevice/default                     u:object_r:edgetpu_dba_service:s0
+
+# Tachyon Service
+com.google.edgetpu.tachyon.IComputeService/default         u:object_r:edgetpu_tachyon_service:s0

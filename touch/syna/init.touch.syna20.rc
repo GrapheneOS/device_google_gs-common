@@ -1,0 +1,3 @@
+on property:vendor.device.modules.ready=1
+    chown system system /sys/class/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs/get_raw_data
+    chown system system /sys/class/spi_master/spi20/spi20.0/synaptics_tcm.0/sysfs/force_active
