@@ -38,8 +38,10 @@ allow edgetpu_tachyon_server proc_version:file r_file_perms;
 # under userdebug builds.
 userdebug_or_eng(`perfetto_producer(edgetpu_tachyon_server)')
 
-# Allow Tachyon service to read tflite Darwinn delegate properties
+# Allow Tachyon service to read tflite DarwiNN delegate properties
 get_prop(edgetpu_tachyon_server, vendor_tflite_delegate_prop)
+# Allow Tachyon service to read DarwiNN runtime properties
+get_prop(edgetpu_tachyon_server, vendor_edgetpu_runtime_prop)
 # Allow Tachyon service to read hetero runtime properties
 get_prop(edgetpu_tachyon_server, vendor_hetero_runtime_prop)
 # Allow Tachyon service to read EdgeTPU CPU scheduler properties

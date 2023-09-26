@@ -54,5 +54,7 @@ userdebug_or_eng(`perfetto_producer(hal_neuralnetworks_darwinn)')
 
 # Allow NNAPI HAL to read tflite DarwiNN delegate properties
 get_prop(hal_neuralnetworks_darwinn, vendor_tflite_delegate_prop)
+# Allow NNAPI HAL to read DarwiNN runtime properties
+get_prop(hal_neuralnetworks_darwinn, vendor_edgetpu_runtime_prop)
 # Allow NNAPI HAL to read hetero runtime properties
 get_prop(hal_neuralnetworks_darwinn, vendor_hetero_runtime_prop)

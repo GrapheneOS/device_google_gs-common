@@ -1,5 +1,8 @@
-# Allow camera HAL to read tflite Darwinn delegate properties
+# Allow camera HAL to read tflite DarwiNN delegate properties
 get_prop(hal_camera_default, vendor_tflite_delegate_prop)
+
+# Allow camera HAL to read DarwiNN runtime properties
+get_prop(hal_camera_default, vendor_edgetpu_runtime_prop)
 
 # Allow camera HAL to read hetero runtime properties
 get_prop(hal_camera_default, vendor_hetero_runtime_prop)
