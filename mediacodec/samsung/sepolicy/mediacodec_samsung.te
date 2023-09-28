@@ -14,6 +14,9 @@ allow mediacodec_samsung gpu_device:chr_file rw_file_perms;
 allow mediacodec_samsung sysfs_mfc:file r_file_perms;
 allow mediacodec_samsung sysfs_mfc:dir r_dir_perms;
 
+allow mediacodec_samsung sysfs_force_empty:dir r_file_perms;
+allow mediacodec_samsung sysfs_force_empty:file rw_file_perms;
+
 # can use graphics allocator
 hal_client_domain(mediacodec_samsung, hal_graphics_allocator)
 
