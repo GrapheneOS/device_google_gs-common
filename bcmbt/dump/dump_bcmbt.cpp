@@ -17,11 +17,13 @@
 //#include <android-base/properties.h>
 #include <android-base/file.h>
 
+#define BCMBT_ACTIVITY_LOG_DIRECTORY "/data/vendor/bluetooth"
 #define BCMBT_SNOOP_LOG_DIRECTORY "/data/vendor/bluetooth"
 #define BCMBT_FW_LOG_DIRECTORY "/data/vendor/ssrdump/coredump"
 #define BCMBT_SNOOP_LOG_PREFIX "btsnoop_hci_vnd"
 #define BCMBT_FW_DUMP_LOG_PREFIX "coredump_bt_socdump_"
 #define BCMBT_CHRE_DUMP_LOG_PREFIX "coredump_bt_chredump_"
+#define BCMBT_ACTIVITY_LOG_PREFIX "bt_activity_"
 
 int main() {
     std::string outputDir = concatenatePath(BUGREPORT_PACKING_DIR, "bcmbt");
@@ -33,5 +35,6 @@ int main() {
     dumpLogs(BCMBT_SNOOP_LOG_DIRECTORY, outputDir.c_str(), 2, BCMBT_SNOOP_LOG_PREFIX);
     dumpLogs(BCMBT_FW_LOG_DIRECTORY, outputDir.c_str(), 10, BCMBT_FW_DUMP_LOG_PREFIX);
     dumpLogs(BCMBT_FW_LOG_DIRECTORY, outputDir.c_str(), 10, BCMBT_CHRE_DUMP_LOG_PREFIX);
+    dumpLogs(BCMBT_ACTIVITY_LOG_DIRECTORY, outputDir.c_str(), 10, BCMBT_ACTIVITY_LOG_PREFIX);
     return 0;
 }
