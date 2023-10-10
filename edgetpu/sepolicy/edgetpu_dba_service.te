@@ -49,3 +49,7 @@ get_prop(edgetpu_dba_server, vendor_edgetpu_runtime_prop)
 get_prop(edgetpu_dba_server, vendor_hetero_runtime_prop)
 # Allow EdgeTPU DBA service to read EdgeTPU CPU scheduler properties
 get_prop(edgetpu_dba_server, vendor_edgetpu_cpu_scheduler_prop)
+
+# Allow DMA Buf access.
+allow edgetpu_dba_server dmabuf_system_heap_device:chr_file r_file_perms;
+
