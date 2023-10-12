@@ -58,3 +58,7 @@ get_prop(hal_neuralnetworks_darwinn, vendor_tflite_delegate_prop)
 get_prop(hal_neuralnetworks_darwinn, vendor_edgetpu_runtime_prop)
 # Allow NNAPI HAL to read hetero runtime properties
 get_prop(hal_neuralnetworks_darwinn, vendor_hetero_runtime_prop)
+
+# Allow DMA Buf access.
+allow hal_neuralnetworks_darwinn dmabuf_system_heap_device:chr_file r_file_perms;
+
