@@ -24,6 +24,7 @@ int main() {
     runCommand("libdisplaycolor", "/vendor/bin/dumpsys displaycolor -v");
     dumpFileContent("Primary panel name", "/sys/devices/platform/exynos-drm/primary-panel/panel_name");
     dumpFileContent("Primary panel extra info", "/sys/devices/platform/exynos-drm/primary-panel/panel_extinfo");
+    dumpFileContent("Primary panel power Vreg", "/sys/devices/platform/exynos-drm/primary-panel/panel_pwr_vreg");
     return 0;
 }
 
