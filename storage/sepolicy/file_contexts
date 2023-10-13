@@ -1,2 +1,5 @@
 /vendor/bin/dump/dump_storage      u:object_r:dump_storage_exec:s0
 /sys/devices/platform/[0-9]+\.ufs/pixel/enable_pixel_ufs_logging  u:object_r:sysfs_scsi_devices_0000:s0
+/dev/sg[0-9]                       u:object_r:sg_device:s0
+/data/vendor/storage(/.*)?         u:object_r:dump_storage_data_file:s0
+/vendor/bin/sg_read_buffer         u:object_r:sg_util_exec:s0
