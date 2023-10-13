@@ -15,22 +15,4 @@ prebuilt_etc {
     vendor: true,
 }
 
-cc_library {
-    name: "libdump",
-    srcs: ["pixel_dump.cpp"],
-    vendor_available: true,
-    vendor_ramdisk_available: true,
-    shared_libs: [
-        "libbase",
-        "liblog",
-    ],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-
-    export_include_dirs: [
-        "include",
-    ],
-}
 
