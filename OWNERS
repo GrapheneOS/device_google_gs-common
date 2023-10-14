@@ -1,19 +1,6 @@
-aaronding@google.com
-rurumihong@google.com
-adamshih@google.com
-wilsonsung@google.com
-lucaswei@google.com
-cyanhsieh@google.com
-cyuanjen@google.com
-robinpeng@google.com
-achant@google.com
-etam@google.com
-pattjin@google.com
-bkhalife@google.com
-lokeshgoel@google.com
-jainne@google.com
-pscovanner@google.com
 
 per-file *.te,*_contexts,te_macros,global_macros=set noparent
 per-file *.te,*_contexts,te_macros,global_macros=file:/sepolicy/OWNERS
+per-file *.mk=set noparent
+per-file *.mk=aaronding@google.com,rurumihong@google.com,adamshih@google.com,wilsonsung@google.com,cyanhsieh@google.com,cyuanjen@google.com,robinpeng@google.com,achant@google.com,etam@google.com,pattjin@google.com,bkhalife@google.com,lokeshgoel@google.com,jainne@google.com,pscovanner@google.com
 
