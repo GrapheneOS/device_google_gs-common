@@ -23,6 +23,7 @@ PRODUCT_PACKAGES += \
 	audio_bluenote_aoc \
 	audio_usb_aoc \
 	audio_cca_aoc \
+	audio_compensation_aoc \
 	libamcsextfile \
 	audio_amcs_ext \
 	audio.usb.default \
