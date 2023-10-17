@@ -9,7 +9,26 @@ heatmap_path=$path
 fi
 
 echo "------ Force Touch Active ------"
-echo 1 > $path/force_active
+result=$( cat "$path/force_active" 2>&1 )
+if [ $? -eq 0 ]; then
+    state=$( echo "$result" |cut -d " " -f 2 )
+    if [ "$state" = "locked" ]; then
+        echo "The force_active is already locked!"
+    else
+        echo 1 > $path/force_active
+        if [ $? -ne 0  ]; then
+            echo "Failed to active touch device"
+            exit 1
+        fi
+    fi
+else
+    if [[ $result == *Operation\ not\ supported* ]]; then
+        echo "force_active is not support, skip it"
+    else
+        echo "Failed to read the state of force_force"
+        exit 1
+    fi
+fi
 
 echo "------ Touch Firmware Version ------"
 cat $path/fw_ver
@@ -40,6 +59,11 @@ cat $heatmap_path/ss_raw
 
 echo "------ Self Test ------"
 cat $path/self_test
+
+if [[ -f "${procfs_path}/dump" ]]; then
+  echo "------ Dump ------"
+  cat ${procfs_path}/dump
+fi
 
 echo "------ Disable Force Touch Active ------"
 echo 0 > $path/force_active

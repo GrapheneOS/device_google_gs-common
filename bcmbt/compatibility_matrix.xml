@@ -1,39 +1,28 @@
-<compatibility-matrix version="1.0" type="framework" level="7">
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.ccc</name>
-        <version>1.1</version>
+<compatibility-matrix version="1.0" type="framework">
+    <hal format="aidl" optional="true">
+        <name>vendor.google.bluetooth_ext</name>
+        <version>1</version>
+        <interface>
+            <name>IBluetoothFinder</name>
+            <instance>default</instance>
+        </interface>
+        <fqname>IBluetoothFinder/default</fqname>
         <interface>
             <name>IBluetoothCcc</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.bt_channel_avoidance</name>
-        <version>1.0</version>
         <interface>
             <name>IBTChannelAvoidance</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl">
-        <name>hardware.google.bluetooth.sar</name>
-        <version>1.1</version>
         <interface>
             <name>IBluetoothSar</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>hardware.google.bluetooth.ext</name>
-        <version>1.0</version>
         <interface>
             <name>IBluetoothExt</name>
             <instance>default</instance>
         </interface>
-    </hal>
-    <hal format="hidl" optional="true">
-        <name>hardware.google.bluetooth.ewp</name>
-        <version>1.0</version>
         <interface>
             <name>IBluetoothEwp</name>
             <instance>default</instance>

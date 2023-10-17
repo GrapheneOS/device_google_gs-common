@@ -14,16 +14,28 @@
  * limitations under the License.
  */
 #include <dump/pixel_dump.h>
+#include <unistd.h>
 
+const char* dvfs_paths[][2] = {
+    {"MIF DVFS", "/sys/devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/trans_stat"},
+    {"INT DVFS", "/sys/devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int/trans_stat"},
+    {"INTCAM DVFS", "/sys/devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/trans_stat"},
+    {"DISP DVFS", "/sys/devices/platform/17000040.devfreq_disp/devfreq/17000040.devfreq_disp/trans_stat"},
+    {"CAM DVFS", "/sys/devices/platform/17000050.devfreq_cam/devfreq/17000050.devfreq_cam/trans_stat"},
+    {"TNR DVFS", "/sys/devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/trans_stat"},
+    {"MFC DVFS", "/sys/devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/trans_stat"},
+    {"BO DVFS", "/sys/devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo/trans_stat"},
+    {"BW DVFS", "/sys/devices/platform/17000080.devfreq_bw/devfreq/17000080.devfreq_bw/trans_stat"},
+    {"DSU DVFS", "/sys/devices/platform/17000090.devfreq_dsu/devfreq/17000090.devfreq_dsu/trans_stat"},
+    {"BCI DVFS", "/sys/devices/platform/170000a0.devfreq_bci/devfreq/170000a0.devfreq_bci/trans_stat"},
+    {"BTS stats", "/sys/devices/platform/exynos-bts/bts_stats"}
+};
 int main() {
-    dumpFileContent("MIF DVFS", "/sys/devices/platform/17000010.devfreq_mif/devfreq/17000010.devfreq_mif/time_in_state");
-    dumpFileContent("INT DVFS", "/sys/devices/platform/17000020.devfreq_int/devfreq/17000020.devfreq_int/time_in_state");
-    dumpFileContent("INTCAM DVFS", "/sys/devices/platform/17000030.devfreq_intcam/devfreq/17000030.devfreq_intcam/time_in_state");
-    dumpFileContent("DISP DVFS", "/sys/devices/platform/17000040.devfreq_disp/devfreq/17000040.devfreq_disp/time_in_state");
-    dumpFileContent("CAM DVFS", "/sys/devices/platform/17000050.devfreq_cam/devfreq/17000050.devfreq_cam/time_in_state");
-    dumpFileContent("TNR DVFS", "/sys/devices/platform/17000060.devfreq_tnr/devfreq/17000060.devfreq_tnr/time_in_state");
-    dumpFileContent("MFC DVFS", "/sys/devices/platform/17000070.devfreq_mfc/devfreq/17000070.devfreq_mfc/time_in_state");
-    dumpFileContent("BO DVFS", "/sys/devices/platform/17000080.devfreq_bo/devfreq/17000080.devfreq_bo/time_in_state");
-    dumpFileContent("BTS stats", "/sys/devices/platform/exynos-bts/bts_stats");
+
+    for (auto &dvfs_path : dvfs_paths ) {
+        if(!access(dvfs_path[1], R_OK)) {
+            dumpFileContent(dvfs_path[0], dvfs_path[1]);
+        }
+    }
     return 0;
 }

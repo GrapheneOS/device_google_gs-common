@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#include <unistd.h>
 #include <dump/pixel_dump.h>
 #include <android-base/properties.h>
 #include <android-base/file.h>
@@ -24,6 +25,9 @@
 #define GPS_MCU_LOG_PREFIX "esw-"
 #define GPS_MALLOC_LOG_DIRECTORY "/data/vendor/gps"
 #define GPS_MALLOC_LOG_PREFIX "malloc_"
+#define GPS_VENDOR_CHIP_INFO "/data/vendor/gps/chip.info"
+#define GPS_RAWLOG_PREFIX "rawbin"
+#define GPS_MEMDUMP_LOG_PREFIX "memdump_"
 
 int main() {
     if(!::android::base::GetBoolProperty("vendor.gps.aol.enabled", false)) {
@@ -41,6 +45,11 @@ int main() {
     dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), 3, GPS_MCU_LOG_PREFIX);
     dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), maxFileNum, GPS_LOG_PREFIX);
     dumpLogs(GPS_MALLOC_LOG_DIRECTORY, outputDir.c_str(), 1, GPS_MALLOC_LOG_PREFIX);
+    if (access(GPS_VENDOR_CHIP_INFO, F_OK) == 0) {
+        copyFile(GPS_VENDOR_CHIP_INFO, concatenatePath(outputDir.c_str(), "chip.info").c_str());
+    }
+    dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), maxFileNum, GPS_RAWLOG_PREFIX);
+    dumpLogs(GPS_LOG_DIRECTORY, outputDir.c_str(), 18, GPS_MEMDUMP_LOG_PREFIX);
     return 0;
 }
 
