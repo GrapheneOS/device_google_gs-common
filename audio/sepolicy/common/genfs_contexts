@@ -20,3 +20,4 @@ genfscon sysfs /devices/platform/audiometrics/pcm_latency                   u:ob
 genfscon sysfs /devices/platform/audiometrics/call_count                    u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/offload_effects_id            u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/offload_effects_duration      u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/bt_usage                      u:object_r:sysfs_pixelstats:s0
