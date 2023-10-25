@@ -16,16 +16,47 @@
 
 #include <dump/pixel_dump.h>
 #include <android-base/file.h>
+#include <android-base/stringprintf.h>
 #include <android-base/properties.h>
 #include <string.h>
 #include <stdio.h>
 #include <log/log.h>
 #include <regex>
 #include <fstream>
+#include <map>
 
 #define F2FS_FSCK_TIME_PROPERTY "ro.boottime.init.fsck.data"
 #define F2FS_MNT_TIME_PROPERTY "ro.boottime.init.mount.data"
 #define BOOTDEVICE_PROPERTY "ro.boot.bootdevice"
+#define BUILD_TYPE_PROPERTY "ro.build.type"
+
+void read_buffer(int buf_id, int total_len, const char* path)
+{
+    int i, len;
+    system("mkdir -m 0770 -p /data/vendor/storage/");
+    auto cmd = android::base::StringPrintf("rm -f /data/vendor/storage/%s\n", path);
+    system(cmd.c_str());
+
+    for (i=0;i<=total_len;i+=524288) {
+        if (total_len-i < 524288) {
+            len = total_len-i;
+            printf("/vendor/bin/sg_read_buffer -m 0x1c -i %d -l %d -o %d -r /dev/sg3 >> /data/vendor/storage/%s\n",
+                buf_id, len, i, path);
+            auto cmd = android::base::StringPrintf(
+                "/vendor/bin/sg_read_buffer -m 0x1c -i %d -l %d -o %d -r /dev/sg3 >> /data/vendor/storage/%s\n",
+                buf_id, len, i, path);
+            system(cmd.c_str());
+            break;
+        }
+        len = 524288;
+        printf("/vendor/bin/sg_read_buffer -m 0x1c -i %d -l %d -o %d -r /dev/sg3 >> /data/vendor/storage/%s\n",
+            buf_id, len, i, path);
+        auto cmd = android::base::StringPrintf(
+            "/vendor/bin/sg_read_buffer -m 0x1c -i %d -l %d -o %d -r /dev/sg3 >> /data/vendor/storage/%s\n",
+            buf_id, len, i, path);
+        system(cmd.c_str());
+    }
+}
 
 int main() {
     //F2FS
@@ -145,6 +176,69 @@ int main() {
     dumpFileContent(
             "",
             "/dev/sys/block/bootdevice/health_descriptor/life_time_estimation_c");
+
+    printf("\n------ UFS error history ------\n");
+    std::string build_type = android::base::GetProperty(BUILD_TYPE_PROPERTY, "");
+    if (build_type == "userdebug") {
+        std::string sg_read_buffer = "/vendor/bin/sg_read_buffer";
+        std::ifstream sg_read_buffer_file(sg_read_buffer.c_str());
+        if (sg_read_buffer_file.is_open()) {
+            const std::string ufs_ver_path(
+                "/dev/sys/block/bootdevice/device_descriptor/specification_version");
+            std::ifstream ufs_ver_file(ufs_ver_path);
+            std::string ufs_ver;
+            if (ufs_ver_file.is_open()) {
+                ufs_ver_file >> ufs_ver;
+                ufs_ver_file.close();
+            }
+            if (strcmp(ufs_ver.c_str(), "0x0210")) {
+                const std::string ufs_brand_path("/sys/block/sda/device/vendor");
+                std::ifstream ufs_brand_file(ufs_brand_path);
+                std::string ufs_brand;
+                if (ufs_brand_file.is_open()) {
+                    ufs_brand_file >> ufs_brand;
+                    ufs_brand_file.close();
+                }
+
+                std::map<std::string, int> const table =
+                    {
+                    {"MICRON", 0x12C},
+                    {"KIOXIA", 0x198},
+                    {"SKhynix", 0x1AD},
+                    {"SAMSUNG", 0x1CE}
+                    };
+                auto ufs_vendor_id = table.find(ufs_brand);
+                if (ufs_vendor_id != table.end()) {
+                    switch(ufs_vendor_id->second){
+                      case 0x12C: //MICRON
+                        read_buffer(16, 2097152, "micron_10_ufs_err_history.dat");
+                        read_buffer(18, 10485760, "micron_12_ufs_err_history.dat");
+                        read_buffer(19, 10485760, "micron_13_ufs_err_history.dat");
+                        break;
+                      case 0x198: //KIOXIA
+                        read_buffer(16, 16773120, "kioxia_10_ufs_err_history.dat");
+                        read_buffer(17, 2097152, "kioxia_11_ufs_err_history.dat");
+                        read_buffer(18, 131072, "kioxia_12_ufs_err_history.dat");
+                        break;
+                      case 0x1AD: //SKhynix
+                        read_buffer(0, 4096, "hynix_00_ufs_err_history.dat");
+                        read_buffer(16, 131072, "skhynix_10_ufs_err_history.dat");
+                        read_buffer(17, 131072, "skhynix_11_ufs_err_history.dat");
+                        read_buffer(18, 131072, "skhynix_12_ufs_err_history.dat");
+                        read_buffer(19, 131072, "skhynix_13_ufs_err_history.dat");
+                        break;
+                      case 0x1CE: //SAMSUNG
+                        read_buffer(16, 8404992, "samsung_10_ufs_err_history.dat");
+                        break;
+                      default:
+                        break;
+                    }
+                }
+                sg_read_buffer_file.close();
+            }
+        } else
+          printf("sg_read_buffer does not exist\n");
+    }
 
     return 0;
 }
