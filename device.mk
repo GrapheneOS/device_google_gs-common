@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+include device/google/gs-common/tts/voice_packs.mk
+
 PRODUCT_SOONG_NAMESPACES += \
 	device/google/gs-common/powerstats
 
