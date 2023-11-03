@@ -1,0 +1,17 @@
+cc_library_static {
+    name: "thermal_HAL_info_config_proto",
+    host_supported: true,
+    srcs: [
+        "thermal_info_config.proto",
+    ],
+    proto: {
+        type: "full",
+        export_proto_headers: true,
+        include_dirs: ["external/protobuf/src"],
+    },
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+}
