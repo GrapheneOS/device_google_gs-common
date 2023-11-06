@@ -1,0 +1,2 @@
+# Diagnostics Tool
+user=_app seinfo=platform name=com.google.android.apps.diagnosticstool domain=diagnosticstool_app isPrivApp=true levelFrom=user

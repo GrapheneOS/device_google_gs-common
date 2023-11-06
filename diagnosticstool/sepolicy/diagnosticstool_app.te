@@ -1,0 +1,4 @@
+type diagnosticstool_app, domain;
+app_domain(diagnosticstool_app)
+
+allow diagnosticstool_app app_api_service:service_manager find;
