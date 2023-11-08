@@ -91,6 +91,7 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
     .StoringPath = "/data/vendor/mitigation/thismeal.bin",
     .ParsedThismealPath = "/data/vendor/mitigation/thismeal.txt",
     .ParsedLastmealPath = "/data/vendor/mitigation/lastmeal.txt",
+    .ParsedLastmealCSVPath = "/data/vendor/mitigation/lastmeal.csv",
     .FvpStatsPath = "/sys/devices/platform/acpm_stats/fvp_stats",
     .PmicCommon = {
                 /* Main Pmic */
@@ -183,7 +184,8 @@ int main(int argc, char **argv) {
         mitigationLogTimeValid = batteryMitigationService->isTimeValid(eventThreadCfg.StoringPath,
                                                                        batteryMitigationStartTime);
         if (!reason.empty() && mitigationLogTimeValid &&
-            batteryMitigationService->genParsedMeal(eventThreadCfg.ParsedLastmealPath)) {
+            batteryMitigationService->genParsedMeal(eventThreadCfg.ParsedLastmealPath) &&
+            batteryMitigationService->genLastmealCSV(eventThreadCfg.ParsedLastmealCSVPath)) {
             android::base::SetProperty(kLastMealProperty, "1");
         }
         /* Start BrownoutEventThread to poll brownout event from kernel */
