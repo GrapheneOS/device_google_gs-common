@@ -1,3 +1,16 @@
+#
+# USF SELinux file security contexts.
+#
+
 /vendor/bin/dump/dump_sensors      u:object_r:dump_sensors_exec:s0
 /vendor/bin/usf_stats              u:object_r:vendor_usf_stats:s0
 /vendor/bin/usf_reg_edit           u:object_r:vendor_usf_reg_edit:s0
+
+# Sensor registry persist files.
+/mnt/vendor/persist/sensors/registry(/.*)? u:object_r:persist_sensor_reg_file:s0
+
+# Sensor registry data files.
+/data/vendor/sensors/registry(/.*)? u:object_r:sensor_reg_data_file:s0
+
+# Sensor debug data files.
+/data/vendor/sensors/debug(/.*)? u:object_r:sensor_debug_data_file:s0
