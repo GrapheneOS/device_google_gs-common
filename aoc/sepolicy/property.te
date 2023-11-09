@@ -1,2 +1,3 @@
 # AoC
 vendor_internal_prop(vendor_aoc_prop)
+vendor_internal_prop(vendor_timeout_aoc_prop)
