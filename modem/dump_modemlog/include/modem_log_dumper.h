@@ -3,8 +3,7 @@
 #include "android_property_manager.h"
 #include "dumper.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 /**
  * @brief Responsible for dumping all relevant modem logs.
@@ -77,5 +76,4 @@ class ModemLogDumper {
   AndroidPropertyManager& android_property_manager_;
 };
 
-}  // namespace logging
-}  // namespace modem
+}  // namespace pixel_modem::logging

@@ -5,8 +5,7 @@
 #include "dumper.h"
 #include "modem_log_constants.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 void ModemLogDumper::DumpModemLogs() {
   bool shouldRestartModemLogging =
@@ -76,5 +75,5 @@ void ModemLogDumper::startModemLogging() {
   android_property_manager_.SetProperty(kModemLoggingEnabledProperty.data(),
                                         "true");
 }
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging

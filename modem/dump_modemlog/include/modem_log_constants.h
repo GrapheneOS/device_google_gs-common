@@ -3,8 +3,7 @@
 
 #include "dumper.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 // Modem related Android System Properties
 
@@ -52,5 +51,5 @@ constexpr static FileCopyInfo kFileCopyInfo[] = {
     {.src_dir = "/mnt/vendor/efs/nv_protected.bin",
      .dest_dir =
          "/data/vendor/radio/logs/always-on/all_logs/nv_protected.bin"}};
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging

@@ -7,8 +7,7 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 namespace {
 
 using ::testing::Eq;
@@ -101,6 +100,6 @@ TEST_F(ModemLogDumperTest,
 
   EXPECT_FALSE(fake_android_property_manager.ModemLoggingHasRestarted());
 }
+
 }  // namespace
-}  // namespace logging
-}  // namespace modem
+}  // namespace pixel_modem::logging

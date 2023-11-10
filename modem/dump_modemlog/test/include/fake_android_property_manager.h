@@ -7,8 +7,7 @@
 #include "android_property_manager.h"
 #include "modem_log_constants.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 /**
  * @brief Fake Implementation of AndroidPropertyManager that mocks some of the
@@ -20,9 +19,8 @@ class FakeAndroidPropertyManager : public AndroidPropertyManager {
   inline constexpr static std::string_view kFalseString = "false";
 
   bool GetBoolProperty(const std::string& key, bool default_value) override {
-    return MapContainsKey(key)
-               ? GetPropertyInternal(key) == kTruthString
-               : default_value;
+    return MapContainsKey(key) ? GetPropertyInternal(key) == kTruthString
+                               : default_value;
   };
 
   std::string GetProperty(const std::string& key,
@@ -73,5 +71,5 @@ class FakeAndroidPropertyManager : public AndroidPropertyManager {
   bool modem_logging_has_been_off_ = false;
   bool modem_logging_has_restarted_ = false;
 };
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging

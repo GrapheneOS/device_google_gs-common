@@ -2,8 +2,7 @@
 
 #include <string>
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 /**
  * @brief Interface for interacting with Android System Properties.
@@ -17,5 +16,5 @@ class AndroidPropertyManager {
   virtual int GetIntProperty(const std::string& key, int default_value);
   virtual void SetProperty(const std::string& key, const std::string& value);
 };
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging

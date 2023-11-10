@@ -19,8 +19,7 @@
 #include "dumper.h"
 #include "modem_log_dumper.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 /**
  * @brief Implementation of AndroidPropertyManager that directly forwards to
@@ -59,13 +58,13 @@ class DumperImpl : public Dumper {
   }
 };
 
-}  // namespace logging
-}  // namespace modem
+}  // namespace pixel_modem::logging
 
 int main() {
-  modem::logging::DumperImpl dumper_impl;
-  modem::logging::AndroidPropertyManagerImpl android_property_manager_impl;
-  modem::logging::ModemLogDumper modem_log_dumper(
+  pixel_modem::logging::DumperImpl dumper_impl;
+  pixel_modem::logging::AndroidPropertyManagerImpl
+      android_property_manager_impl;
+  pixel_modem::logging::ModemLogDumper modem_log_dumper(
       dumper_impl, android_property_manager_impl);
 
   modem_log_dumper.DumpModemLogs();
