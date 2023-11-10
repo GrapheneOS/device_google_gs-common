@@ -1,0 +1,15 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_defaults {
+    name: "fake_modem_clock_manager_defaults",
+    shared_libs: [ "modem_clock_manager" ],
+}
+
+cc_library_static {
+    name: "fake_modem_clock_manager",
+    export_include_dirs: [ "include" ],
+    defaults: [ "fake_modem_clock_manager_defaults" ],
+    vendor_available: true,
+}
