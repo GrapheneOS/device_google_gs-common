@@ -1,0 +1,18 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+modem_android_property_manager_impl_public_deps = [
+    "modem_android_property_manager",
+]
+
+cc_library_shared {
+    name: "modem_android_property_manager_impl",
+    export_include_dirs: [ "include" ],
+    srcs: [ "android_property_manager_impl.cpp" ],
+    shared_libs: modem_android_property_manager_impl_public_deps + [
+        "libbase",
+    ],
+    export_shared_lib_headers: modem_android_property_manager_impl_public_deps,
+    vendor_available: true,
+}
