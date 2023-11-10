@@ -1,0 +1,14 @@
+# Allow the audio hal to access the EdgeTPU service and the
+# Android shared memory allocated by the EdgeTPU service for
+# on-device compilation.
+allow hal_audio_default edgetpu_device:chr_file rw_file_perms;
+allow hal_audio_default edgetpu_vendor_service:service_manager find;
+binder_call(hal_audio_default, edgetpu_vendor_server)
+
+# Allow edgetpu_app_service as well, due to the EdgeTpu metrics logging
+# library has a dependency on edgetpu_app_service, see b/275016466.
+allow hal_audio_default edgetpu_app_service:service_manager find;
+binder_call(hal_audio_default, edgetpu_app_server)
+
+# Allow audio HAL to read tflite Darwinn delegate properties
+get_prop(hal_audio_default, vendor_tflite_delegate_prop)
