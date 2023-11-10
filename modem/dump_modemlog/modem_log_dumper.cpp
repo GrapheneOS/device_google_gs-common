@@ -2,6 +2,7 @@
 
 #include <log/log.h>
 
+#include "bugreport_constants.h"
 #include "dumper.h"
 #include "modem_log_constants.h"
 

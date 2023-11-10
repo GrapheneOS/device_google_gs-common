@@ -24,6 +24,7 @@ cc_defaults {
         "libbase",
         // liblog is not directly used by us, but it's a transitive dependency of libbase
         "liblog",
+        "modem_log_constants",
     ],
 }
 
@@ -65,8 +66,10 @@ cc_test {
         "modem_android_property_manager_fake_defaults",
     ],
     static_libs: [
-        "modem_log_dumper",
+        "modem_android_property_manager",
         "modem_android_property_manager_fake",
+        "modem_log_constants",
+        "modem_log_dumper",
         "libgmock",
     ],
     vendor: true,
