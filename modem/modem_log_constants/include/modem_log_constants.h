@@ -21,6 +21,10 @@ inline constexpr std::string_view kModemLoggingNumberBugreportProperty =
 // determine the logging type.
 inline constexpr std::string_view kModemLoggingPathProperty =
     "vendor.sys.modem.logging.log_path";
+inline constexpr std::string_view kModemLoggingLogCountProperty =
+    "vendor.sys.modem.logging.log_count";
+inline constexpr std::string_view kModemLoggingLogPath =
+    "vendor.sys.modem.logging.log_path";
 
 // Bugreport constants
 inline constexpr int kDefaultBugreportNumberFiles = 100;
