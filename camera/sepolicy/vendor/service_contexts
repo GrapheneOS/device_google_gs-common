@@ -1,5 +1,3 @@
-com.google.pixel.camera.services.binder.IServiceBinder/default u:object_r:vendor_camera_binder_service:s0
-
 com.google.pixel.camera.connectivity.hal.provider.ICameraProvider/default u:object_r:hal_pixel_remote_camera_service:s0
 
 com.google.pixel.camera.services.lyricconfigprovider.ILyricConfigProvider/default u:object_r:vendor_camera_lyricconfigprovider_service:s0
