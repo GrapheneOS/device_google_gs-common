@@ -21,6 +21,7 @@ int main() {
     setbuf(stdout, NULL);
     dumpFileContent("Long running IRQ metrics", "/sys/kernel/metrics/irq/long_irq_metrics");
     dumpFileContent("Storm IRQ metrics", "/sys/kernel/metrics/irq/storm_irq_metrics");
+    dumpFileContent("Long RT Runnable metrics", "/sys/kernel/metrics/runnable/stats");
     dumpFileContent("Resume latency metrics", "/sys/kernel/metrics/resume_latency/resume_latency_metrics");
     return 0;
 }
