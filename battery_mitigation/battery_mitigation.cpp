@@ -83,10 +83,17 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
         {"voltage_now", "/sys/class/power_supply/battery/voltage_now"},
         {"current_now", "/sys/class/power_supply/battery/current_now"},
     },
-    .NumericSysfsStatDirs = {
-        {"last_triggered_mode", "/sys/devices/virtual/pmic/mitigation/last_triggered_mode/"},
-    },
     .TriggeredIdxPath = "/sys/devices/virtual/pmic/mitigation/br_stats/triggered_idx",
+    .triggeredStatePath[android::hardware::google::pixel::UVLO1] =
+        "/sys/devices/virtual/pmic/mitigation/triggered_state/uvlo1_triggered",
+    .triggeredStatePath[android::hardware::google::pixel::UVLO2] =
+        "/sys/devices/virtual/pmic/mitigation/triggered_state/uvlo2_triggered",
+    .triggeredStatePath[android::hardware::google::pixel::OILO1] =
+        "/sys/devices/virtual/pmic/mitigation/triggered_state/oilo1_triggered",
+    .triggeredStatePath[android::hardware::google::pixel::OILO2] =
+        "/sys/devices/virtual/pmic/mitigation/triggered_state/oilo2_triggered",
+    .triggeredStatePath[android::hardware::google::pixel::SMPL] =
+        "/sys/devices/virtual/pmic/mitigation/triggered_state/smpl_triggered",
     .BrownoutStatsPath = "/sys/devices/virtual/pmic/mitigation/br_stats/stats",
     .StoringPath = "/data/vendor/mitigation/thismeal.bin",
     .ParsedThismealPath = "/data/vendor/mitigation/thismeal.txt",
@@ -112,27 +119,19 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
                 {
                     .MainPmicName = "s2mpg10-odpm\n",
                     .SubPmicName = "s2mpg11-odpm\n",
-                    .PcieModemPath = "/sys/devices/platform/11920000.pcie/power_stats",
-                    .PcieWifiPath = "/sys/devices/platform/14520000.pcie/power_stats",
                 },
                 {
                     .MainPmicName = "s2mpg12-odpm\n",
                     .SubPmicName = "s2mpg13-odpm\n",
-                    .PcieModemPath = "/sys/devices/platform/11920000.pcie/power_stats",
-                    .PcieWifiPath = "/sys/devices/platform/14520000.pcie/power_stats",
                 },
                 {
                     .MainPmicName = "s2mpg14-odpm\n",
                     .SubPmicName = "s2mpg15-odpm\n",
-                    .PcieModemPath = "/sys/devices/platform/12100000.pcie/power_stats",
-                    .PcieWifiPath = "/sys/devices/platform/13120000.pcie/power_stats",
                 },
                 /* MAX_SUPPORTED_PLATFORM */
                 {
                     .MainPmicName = "s2mpg14-odpm\n",
                     .SubPmicName = "s2mpg15-odpm\n",
-                    .PcieModemPath = "/sys/devices/platform/12100000.pcie/power_stats",
-                    .PcieWifiPath = "/sys/devices/platform/13120000.pcie/power_stats",
                 },
 
     },
@@ -188,8 +187,6 @@ int main(int argc, char **argv) {
             batteryMitigationService->genLastmealCSV(eventThreadCfg.ParsedLastmealCSVPath)) {
             android::base::SetProperty(kLastMealProperty, "1");
         }
-        /* Start BrownoutEventThread to poll brownout event from kernel */
-        batteryMitigationService->startBrownoutEventThread();
     } else{
         bmSp = new BatteryMitigation(cfg);
         if (!bmSp) {
@@ -225,6 +222,10 @@ int main(int argc, char **argv) {
     }
     if (isBatteryMitigationReady) {
         android::base::SetProperty(kReadyProperty, "1");
+    }
+    if (isBatteryMitigationReady && brownoutStatsBinarySupported) {
+        /* Start BrownoutEventThread to poll brownout event from kernel */
+        batteryMitigationService->startBrownoutEventThread();
     }
     while (true) {
         pause();
