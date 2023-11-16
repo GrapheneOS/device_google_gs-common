@@ -1,5 +1,5 @@
 # Allow PBCS to add the ServiceBinder service to ServiceManager.
-add_service(vendor_pbcs_app, vendor_camera_binder_service);
+add_service(vendor_pbcs_app, camera_binder_service);
 # Allow PBCS to add the LyricConfigProvider service to ServiceManager.
 add_service(vendor_pbcs_app, vendor_camera_lyricconfigprovider_service);
 # Allow PBCS to add the CameraIdRemapper service to ServiceManager.
