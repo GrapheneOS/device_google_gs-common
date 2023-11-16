@@ -22,4 +22,7 @@ userdebug_or_eng(`
 
   # For persistent property use
   get_prop(gyotaku_app, logpersistd_logging_prop);
+
+  # For access hal_power_stats
+  hal_client_domain(gyotaku_app, hal_power_stats);
 ')
