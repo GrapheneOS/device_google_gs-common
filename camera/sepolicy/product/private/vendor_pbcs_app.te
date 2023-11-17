@@ -7,3 +7,6 @@ dontaudit vendor_pbcs_app system_app_data_file:dir *;
 allow vendor_pbcs_app app_api_service:service_manager find;
 # Allow PBCS to find Camera Service.
 allow vendor_pbcs_app cameraserver_service:service_manager find;
+
+# Allow PBCS to add the ServiceBinder service to ServiceManager.
+add_service(vendor_pbcs_app, camera_binder_service);
