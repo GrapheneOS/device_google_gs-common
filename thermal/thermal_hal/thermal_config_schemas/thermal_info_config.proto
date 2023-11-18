@@ -1,0 +1,154 @@
+/*
+ * Copyright (C) 2023 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+package devices.shusky;
+
+message ThermalConfig {
+  repeated Sensor sensors = 1 [ json_name = "Sensors" ];
+  repeated CoolingDevice coolingdevices = 2 [ json_name = "CoolingDevices" ];
+  repeated PowerRails powerrails = 3 [ json_name = "PowerRails" ];
+  Stats stats = 4 [ json_name = "Stats" ];
+}
+
+message Sensor {
+  string name = 1 [ json_name = "Name" ];
+  string type = 2 [ json_name = "Type" ];
+  repeated float hotthreshold = 3 [ json_name = "HotThreshold" ];
+  repeated float hothysteresis = 4 [ json_name = "HotHysteresis" ];
+  string temppath = 5 [ json_name = "TempPath" ];
+  float multiplier = 6 [ json_name = "Multiplier" ];
+  int32 pollingdelay = 7 [ json_name = "PollingDelay" ];
+  int32 passivedelay = 8 [ json_name = "PassiveDelay" ];
+  bool hidden = 9 [ json_name = "Hidden" ];
+  bool virtualsensor = 10 [ json_name = "VirtualSensor" ];
+  repeated string triggersensor = 11 [ json_name = "TriggerSensor" ];
+  string formula = 12 [ json_name = "Formula" ];
+  repeated string combination = 13 [ json_name = "Combination" ];
+  repeated float Coefficient = 14 [ json_name = "Coefficient" ];
+  bool sendpowerhint = 15 [ json_name = "SendPowerHint" ];
+  bool sendcallback = 16 [ json_name = "SendCallback" ];
+  PIDInfo pidinfo = 17 [ json_name = "PIDInfo" ];
+  repeated ExcludedPowerInfo excludedpowerinfo = 18
+      [ json_name = "ExcludedPowerInfo" ];
+  repeated BindedCdevInfo bindedcdevinfos = 19 [ json_name = "BindedCdevInfo" ];
+  repeated string combinationtype = 20 [ json_name = "CombinationType" ];
+  string version = 21 [ json_name = "Version" ];
+  int32 offset = 22 [ json_name = "Offset" ];
+  repeated Profile profile = 23 [ json_name = "Profile" ];
+  float vrthreshold = 24 [ json_name = "VrThreshold" ];
+  bool monitor = 25 [ json_name = "Monitor" ];
+}
+
+message Profile {
+  string mode = 1 [ json_name = "Mode" ];
+  repeated BindedCdevInfo bindedcdevinfo = 2 [ json_name = "BindedCdevInfo" ];
+}
+
+message ExcludedPowerInfo {
+  string powerrail = 1 [ json_name = "PowerRail" ];
+  repeated float powerweight = 2 [ json_name = "PowerWeight" ];
+}
+
+message BindedCdevInfo {
+  string cdevrequest = 1 [ json_name = "CdevRequest" ];
+  repeated float cdevweightforpid = 2 [ json_name = "CdevWeightForPID" ];
+  int32 maxreleasestep = 3 [ json_name = "MaxReleaseStep" ];
+  int32 maxthrottlestep = 4 [ json_name = "MaxThrottleStep" ];
+  repeated int32 cdevceiling = 5 [ json_name = "CdevCeiling" ];
+  repeated int32 limitinfo = 6 [ json_name = "LimitInfo" ];
+  string bindedpowerrail = 7 [ json_name = "BindedPowerRail" ];
+  bool disabled = 8 [ json_name = "Disabled" ];
+}
+
+message PIDInfo {
+  repeated float k_po = 1 [ json_name = "K_Po" ];
+  repeated float k_pu = 2 [ json_name = "K_Pu" ];
+  repeated float k_i = 3 [ json_name = "K_I" ];
+  repeated float k_d = 4 [ json_name = "K_D" ];
+  repeated float i_max = 5 [ json_name = "I_Max" ];
+  repeated float s_power = 6 [ json_name = "S_Power" ];
+  repeated float minallocpower = 7 [ json_name = "MinAllocPower" ];
+  repeated float maxallocpower = 8 [ json_name = "MaxAllocPower" ];
+  repeated float i_cutoff = 9 [ json_name = "I_Cutoff" ];
+  int32 i_default = 10 [ json_name = "I_Default" ];
+}
+
+message CoolingDevice {
+  string name = 1 [ json_name = "Name" ];
+  string type = 2 [ json_name = "Type" ];
+  string writepath = 3 [ json_name = "WritePath" ];
+  repeated int32 state2power = 4 [ json_name = "State2Power" ];
+}
+
+message PowerRails {
+  string name = 1 [ json_name = "Name" ];
+  int32 powersampledelay = 2 [ json_name = "PowerSampleDelay" ];
+  int32 powersamplecount = 3 [ json_name = "PowerSampleCount" ];
+  bool virtualrails = 4 [ json_name = "VirtualRails" ];
+  string formula = 5 [ json_name = "Formula" ];
+  repeated string combination = 6 [ json_name = "Combination" ];
+  repeated float coefficient = 7 [ json_name = "Coefficient" ];
+}
+
+message Stats {
+  SensorStats sensorstats = 1 [ json_name = "Sensors" ];
+  CoolingDeviceStats coolingdevicestats = 2 [ json_name = "CoolingDevices" ];
+}
+
+message SensorStats {
+  repeated string recordwithdefaultthreshold = 1
+      [ json_name = "RecordWithDefaultThreshold" ];
+  repeated SensorStat recordwiththreshold = 2
+      [ json_name = "RecordWithThreshold" ];
+  Abnormality abnormality = 3 [ json_name = "Abnormality" ];
+}
+
+message CoolingDeviceStats {
+  RecordVotePerSensor recordvotepersensor = 1
+      [ json_name = "RecordVotePerSensor" ];
+}
+
+message RecordVotePerSensor {
+  bool defaultthresholdenableall = 1
+      [ json_name = "DefaultThresholdEnableAll" ];
+}
+
+message SensorStat {
+  string name = 1 [ json_name = "Name" ];
+  repeated int32 thresholds = 2 [ json_name = "Thresholds" ];
+}
+
+message Abnormality {
+  Outlier outlier = 1 [ json_name = "Outlier" ];
+  Stuck stuck = 2 [ json_name = "Stuck" ];
+}
+
+message Outlier { repeated Config configs = 1 [ json_name = "Configs" ]; }
+
+message Stuck { repeated Config configs = 1 [ json_name = "Configs" ]; }
+
+message Config {
+  repeated string monitor = 1 [ json_name = "Monitor" ];
+  TempStuck tempstuck = 2 [ json_name = "TempStuck" ];
+  repeated float temprange = 3 [ json_name = "TempRange" ];
+}
+
+message TempStuck {
+  int32 minpollingcount = 1 [ json_name = "MinPollingCount" ];
+  int32 minstuckduration = 2 [ json_name = "MinStuckDuration" ];
+}
