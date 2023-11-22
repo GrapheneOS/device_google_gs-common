@@ -20,6 +20,8 @@
 /dev/acd-com.google.usf.non_wake_up u:object_r:aoc_device:s0
 /dev/acd-com.google.chre             u:object_r:aoc_device:s0
 /dev/acd-com.google.chre.non_wake_up u:object_r:aoc_device:s0
+/dev/acd-com.google.bt              u:object_r:aoc_device:s0
+/dev/acd-com.google.bt.non_wake_up  u:object_r:aoc_device:s0
 /dev/acd-logging                    u:object_r:aoc_device:s0
 /dev/aoc                            u:object_r:aoc_device:s0
 /dev/acd-audio_ap_offload_rx        u:object_r:aoc_device:s0
