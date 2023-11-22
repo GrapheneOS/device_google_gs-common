@@ -1,3 +1,4 @@
 type debugfs_f2fs, debugfs_type, fs_type;
 type dump_storage_data_file, file_type, data_file_type;
+type sg_device, dev_type;
 type sg_util_exec, exec_type, vendor_file_type, file_type;
