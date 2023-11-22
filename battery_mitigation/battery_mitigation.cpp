@@ -119,19 +119,31 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
                 {
                     .MainPmicName = "s2mpg10-odpm\n",
                     .SubPmicName = "s2mpg11-odpm\n",
+                    .NumericSysfsStatPaths = {
+                        {"battery_soc", "/sys/class/power_supply/max77759fg/capacity"},
+                    },
                 },
                 {
                     .MainPmicName = "s2mpg12-odpm\n",
                     .SubPmicName = "s2mpg13-odpm\n",
+                    .NumericSysfsStatPaths = {
+                        {"battery_soc", "/sys/class/power_supply/max77759fg/capacity"},
+                    },
                 },
                 {
                     .MainPmicName = "s2mpg14-odpm\n",
                     .SubPmicName = "s2mpg15-odpm\n",
+                    .NumericSysfsStatPaths = {
+                        {"battery_soc", "/sys/class/power_supply/max77779fg/capacity"},
+                    },
                 },
                 /* MAX_SUPPORTED_PLATFORM */
                 {
                     .MainPmicName = "s2mpg14-odpm\n",
                     .SubPmicName = "s2mpg15-odpm\n",
+                    .NumericSysfsStatPaths = {
+                        {"battery_soc", "/sys/class/power_supply/max77779fg/capacity"},
+                    },
                 },
 
     },
