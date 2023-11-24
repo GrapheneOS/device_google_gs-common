@@ -345,8 +345,12 @@ Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb 
     char boot_dev[PROPERTY_VALUE_MAX];
     property_get("ro.boot.bootdevice", boot_dev, "");
     if (boot_dev[0] == '\0') {
-        _hidl_cb({false, "invalid ro.boot.bootdevice prop"});
-        return Void();
+        ALOGI("failed to get ro.boot.bootdevice. try ro.boot.boot_devices\n");
+        property_get("ro.boot.boot_devices", boot_dev, "");
+        if (boot_dev[0] == '\0') {
+            _hidl_cb({false, "invalid ro.boot.bootdevice and ro.boot.boot_devices prop"});
+            return Void();
+        }
     }
 
     std::string boot_lun_path =

@@ -461,8 +461,12 @@ ScopedAStatus BootControl::setActiveBootSlot(int32_t in_slot) {
     char boot_dev[PROPERTY_VALUE_MAX];
     property_get("ro.boot.bootdevice", boot_dev, "");
     if (boot_dev[0] == '\0') {
-        return ScopedAStatus::fromServiceSpecificErrorWithMessage(
-                COMMAND_FAILED, "invalid ro.boot.bootdevice prop");
+        ALOGI("failed to get ro.boot.bootdevice. try ro.boot.boot_devices\n");
+        property_get("ro.boot.boot_devices", boot_dev, "");
+        if (boot_dev[0] == '\0') {
+            return ScopedAStatus::fromServiceSpecificErrorWithMessage(
+                    COMMAND_FAILED, "invalid ro.boot.bootdevice and ro.boot.boot_devices prop");
+        }
     }
 
     std::string boot_lun_path =
