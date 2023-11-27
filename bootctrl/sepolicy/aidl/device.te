@@ -1,0 +1,5 @@
+# devinfo block device
+type devinfo_block_device, dev_type;
+
+# OTA
+type sda_block_device, dev_type;
