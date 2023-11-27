@@ -1,0 +1,2 @@
+# sysfs
+type sysfs_ota, sysfs_type, fs_type;

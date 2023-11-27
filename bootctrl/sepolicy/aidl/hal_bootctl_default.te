@@ -1,0 +1,8 @@
+allow hal_bootctl_default devinfo_block_device:blk_file rw_file_perms;
+allow hal_bootctl_default sda_block_device:blk_file rw_file_perms;
+allow hal_bootctl_default sysfs_ota:file rw_file_perms;
+allow hal_bootctl_default tee_device:chr_file rw_file_perms;
+
+recovery_only(`
+  allow hal_bootctl_default rootfs:dir r_dir_perms;
+')
