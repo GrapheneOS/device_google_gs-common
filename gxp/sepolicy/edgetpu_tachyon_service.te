@@ -1,0 +1,3 @@
+# Allow Tachyon service to access the GXP device and read GXP properties.
+allow edgetpu_tachyon_server gxp_device:chr_file rw_file_perms;
+get_prop(edgetpu_tachyon_server, vendor_gxp_prop)
