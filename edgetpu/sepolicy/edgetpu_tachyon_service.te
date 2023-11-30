@@ -27,6 +27,9 @@ allow edgetpu_tachyon_server gpu_device:chr_file rw_file_perms;
 allow edgetpu_tachyon_server gpu_device:dir r_dir_perms;
 allow edgetpu_tachyon_server ion_device:chr_file r_file_perms;
 
+# Allow Tachyon service to access dmabuf sysytem.
+allow edgetpu_tachyon_server dmabuf_system_heap_device:chr_file r_file_perms;
+
 # Allow Tachyon service to read the overcommit_memory info.
 allow edgetpu_tachyon_server proc_overcommit_memory:file r_file_perms;
 
