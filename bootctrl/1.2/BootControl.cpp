@@ -50,6 +50,8 @@ namespace {
 #define BOOT_B_PATH     "/dev/block/by-name/boot_b"
 #define DEVINFO_PATH    "/dev/block/by-name/devinfo"
 
+#define BLOW_AR_PATH    "/sys/kernel/boot_control/blow_ar"
+
 // slot flags
 #define AB_ATTR_PRIORITY_SHIFT      52
 #define AB_ATTR_PRIORITY_MASK       (3UL << AB_ATTR_PRIORITY_SHIFT)
@@ -230,7 +232,7 @@ static int blow_otp_AR(bool secure) {
     return 0;
 }
 
-static bool blowAR() {
+static bool blowAR_zuma() {
     int ret = blow_otp_AR(true);
     if (ret) {
         ALOGI("Blow secure anti-rollback OTP failed");
@@ -245,6 +247,25 @@ static bool blowAR() {
 
     return true;
 }
+
+static bool blowAR_gs101() {
+    android::base::unique_fd fd(open(BLOW_AR_PATH, O_WRONLY | O_DSYNC));
+    return android::base::WriteStringToFd("1", fd);
+}
+
+static bool blowAR() {
+    char platform[PROPERTY_VALUE_MAX];
+    property_get("ro.boot.hardware.platform", platform, "");
+
+    if (std::string(platform) == "gs101") {
+        return blowAR_gs101();
+    } else if (std::string(platform) == "gs201" || std::string(platform) == "zuma") {
+        return blowAR_zuma();
+    }
+
+    return true;
+}
+
 }  // namespace
 
 // Methods from ::android::hardware::boot::V1_0::IBootControl follow.
