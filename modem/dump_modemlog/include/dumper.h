@@ -3,8 +3,7 @@
 #include <ostream>
 #include <string_view>
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 /**
  * @brief Data object for information about dumpings logs.
@@ -67,5 +66,5 @@ class Dumper {
   virtual void DumpLogs(const LogDumpInfo& log_dump_info);
   virtual void CopyFile(const FileCopyInfo& file_copy_info);
 };
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging
