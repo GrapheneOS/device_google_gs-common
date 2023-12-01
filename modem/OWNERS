@@ -1,0 +1,3 @@
+# Give ownership of code files to Apps and Services team.
+# SEPolicy files are intentionally ignored since they should be reviewed by the SEPolicy team.
+per-file *.bp,*.cpp,*.h,*.sh=kierancyphus@google.com,everrosales@google.com,nicoleytlee@google.com,alanblc@google.com
