@@ -77,7 +77,6 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
         {"cpu0_freq", "/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"},
         {"cpu1_freq", "/sys/devices/system/cpu/cpu1/cpufreq/scaling_cur_freq"},
         {"cpu2_freq", "/sys/devices/system/cpu/cpu2/cpufreq/scaling_cur_freq"},
-        {"gpu_freq", "/sys/devices/platform/1f000000.mali/cur_freq"},
         {"battery_temp", "/dev/thermal/tz-by-name/battery/temp"},
         {"battery_cycle", "/dev/thermal/tz-by-name/battery_cycle/temp"},
         {"voltage_now", "/sys/class/power_supply/battery/voltage_now"},
@@ -115,37 +114,24 @@ const struct MitigationConfig::EventThreadConfig eventThreadCfg = {
                 },
     },
     .PlatformSpecific = {
-                /* MIN_SUPPORTED_PLATFORM */
-                {
-                    .MainPmicName = "s2mpg10-odpm\n",
-                    .SubPmicName = "s2mpg11-odpm\n",
-                    .NumericSysfsStatPaths = {
-                        {"battery_soc", "/sys/class/power_supply/max77759fg/capacity"},
+                .NumericSysfsStatPaths = {
+                    {
+                        .name = "battery_soc",
+                        .paths = {
+                            "/sys/class/power_supply/max77759fg/capacity",
+                            "/sys/class/power_supply/max77779fg/capacity",
+                        },
                     },
-                },
-                {
-                    .MainPmicName = "s2mpg12-odpm\n",
-                    .SubPmicName = "s2mpg13-odpm\n",
-                    .NumericSysfsStatPaths = {
-                        {"battery_soc", "/sys/class/power_supply/max77759fg/capacity"},
+                    {
+                        .name = "gpu_freq",
+                        .paths = {
+                            "/sys/devices/platform/1c500000.mali/cur_freq",
+                            "/sys/devices/platform/28000000.mali/cur_freq",
+                            "/sys/devices/platform/1f000000.mali/cur_freq",
+                        },
                     },
-                },
-                {
-                    .MainPmicName = "s2mpg14-odpm\n",
-                    .SubPmicName = "s2mpg15-odpm\n",
-                    .NumericSysfsStatPaths = {
-                        {"battery_soc", "/sys/class/power_supply/max77779fg/capacity"},
-                    },
-                },
-                /* MAX_SUPPORTED_PLATFORM */
-                {
-                    .MainPmicName = "s2mpg14-odpm\n",
-                    .SubPmicName = "s2mpg15-odpm\n",
-                    .NumericSysfsStatPaths = {
-                        {"battery_soc", "/sys/class/power_supply/max77779fg/capacity"},
-                    },
-                },
 
+                },
     },
 };
 
@@ -154,29 +140,17 @@ const char kReadyProperty[] = "vendor.brownout.mitigation.ready";
 const char kLastMealPath[] = "/data/vendor/mitigation/lastmeal.txt";
 const char kBRRequestedProperty[] = "vendor.brownout_reason";
 const char kLastMealProperty[] = "vendor.brownout.br.feasible";
-const char kCDTProperty[] = "ro.boot.cdt_hwid";
 const std::regex kTimestampRegex("^\\S+\\s[0-9]+:[0-9]+:[0-9]+\\S+$");
 
-std::string GetSystemProperty(std::string property) {
-    char value[PROP_VALUE_MAX];
-    __system_property_get(property.c_str(), value);
-    return std::string(value);
-}
-
 int main(int argc, char **argv) {
-    std::string cdt = GetSystemProperty(kCDTProperty);
-    int platformNum  = atoi(cdt.substr(5, 1).c_str());
-    batteryMitigationService = new BatteryMitigationService(eventThreadCfg,
-                                                            platformNum);
+    batteryMitigationService = new BatteryMitigationService(eventThreadCfg);
     if (!batteryMitigationService) {
         return 0;
     }
-    bool platformSupported = batteryMitigationService->isPlatformSupported();
     bool brownoutStatsBinarySupported = batteryMitigationService->isBrownoutStatsBinarySupported();
     if (argc == 2) {
         if(strcmp(argv[1], "-d") == 0 &&
-           brownoutStatsBinarySupported &&
-           platformSupported) {
+           brownoutStatsBinarySupported) {
             /* Create thismeal.txt from thismeal.bin */
             batteryMitigationService->genParsedMeal(eventThreadCfg.ParsedThismealPath);
         }
