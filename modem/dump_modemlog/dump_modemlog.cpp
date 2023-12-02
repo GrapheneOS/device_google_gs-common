@@ -16,33 +16,11 @@
 #include <android-base/properties.h>
 #include <dump/pixel_dump.h>
 
+#include "android_property_manager_impl.h"
 #include "dumper.h"
 #include "modem_log_dumper.h"
 
-namespace modem {
-namespace logging {
-
-/**
- * @brief Implementation of AndroidPropertyManager that directly forwards to
- * android base methods.
- */
-class AndroidPropertyManagerImpl : public AndroidPropertyManager {
- public:
-  bool GetBoolProperty(const std::string& key, bool default_value) override {
-    return android::base::GetBoolProperty(key, default_value);
-  };
-
-  std::string GetProperty(const std::string& key,
-                          const std::string& default_value) override {
-    return android::base::GetProperty(key, default_value);
-  };
-  int GetIntProperty(const std::string& key, int default_value) override {
-    return android::base::GetIntProperty(key, default_value);
-  };
-  void SetProperty(const std::string& key, const std::string& value) override {
-    android::base::SetProperty(key, value);
-  };
-};
+namespace pixel_modem::logging {
 
 /**
  * @brief Implementation of Dumper that directly forwards to their corresponding
@@ -59,13 +37,12 @@ class DumperImpl : public Dumper {
   }
 };
 
-}  // namespace logging
-}  // namespace modem
+}  // namespace pixel_modem::logging
 
 int main() {
-  modem::logging::DumperImpl dumper_impl;
-  modem::logging::AndroidPropertyManagerImpl android_property_manager_impl;
-  modem::logging::ModemLogDumper modem_log_dumper(
+  pixel_modem::logging::DumperImpl dumper_impl;
+  pixel_modem::AndroidPropertyManagerImpl android_property_manager_impl;
+  pixel_modem::logging::ModemLogDumper modem_log_dumper(
       dumper_impl, android_property_manager_impl);
 
   modem_log_dumper.DumpModemLogs();

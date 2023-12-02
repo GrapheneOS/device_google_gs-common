@@ -2,13 +2,15 @@
 
 #include <string_view>
 
+#include "android_property_manager.h"
+#include "bugreport_constants.h"
 #include "dumper.h"
 #include "fake_android_property_manager.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include "modem_log_constants.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 namespace {
 
 using ::testing::Eq;
@@ -23,9 +25,8 @@ inline constexpr static LogDumpInfo kAlwaysOnLogDumpInfo = {
 
 void StartModemLogging(
     FakeAndroidPropertyManager& fake_android_property_manager) {
-  fake_android_property_manager.SetProperty(
-      kModemLoggingEnabledProperty.data(),
-      FakeAndroidPropertyManager::kTruthString.data());
+  fake_android_property_manager.SetProperty(kModemLoggingEnabledProperty.data(),
+                                            kTruthString.data());
 }
 
 class MockDumper : public Dumper {
@@ -101,6 +102,6 @@ TEST_F(ModemLogDumperTest,
 
   EXPECT_FALSE(fake_android_property_manager.ModemLoggingHasRestarted());
 }
+
 }  // namespace
-}  // namespace logging
-}  // namespace modem
+}  // namespace pixel_modem::logging

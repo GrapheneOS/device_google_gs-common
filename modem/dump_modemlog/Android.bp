@@ -1,0 +1,79 @@
+package {
+    default_applicable_licenses: [ "Android-Apache-2.0" ],
+}
+
+sh_binary {
+    name: "dump_modem.sh",
+    src: "dump_modem.sh",
+    vendor: true,
+    sub_dir: "dump",
+}
+
+// Modem Log Dumper
+
+modem_log_dumper_public_deps = [
+    "modem_android_property_manager",
+]
+
+// When `modem_log_dumper` is included statically, its dependencies are not
+// transitively included, so the target will also have to include this default
+// to restate them.
+cc_defaults {
+    name: "modem_log_dumper_defaults",
+    shared_libs: modem_log_dumper_public_deps + [
+        "libbase",
+        // liblog is not directly used by us, but it's a transitive dependency of libbase
+        "liblog",
+        "modem_log_constants",
+    ],
+}
+
+cc_library {
+    name: "modem_log_dumper",
+    srcs: [ "modem_log_dumper.cpp" ],
+    defaults: [ "modem_log_dumper_defaults" ],
+    export_shared_lib_headers: modem_log_dumper_public_deps,
+    export_include_dirs: [ "include" ],
+    vendor_available: true,
+}
+
+// dump_modemlog
+
+cc_binary {
+    name: "dump_modemlog",
+    srcs: [ "dump_modemlog.cpp" ],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libbase",
+        "libdump",
+        "liblog",
+        "modem_android_property_manager_impl",
+        "modem_log_dumper",
+    ],
+    vendor: true,
+    relative_install_path: "dump",
+}
+
+cc_test {
+    name: "dump_modemlog_test",
+    srcs: [ "modem_log_dumper_test.cpp" ],
+    defaults: [
+        "modem_log_dumper_defaults",
+        "modem_android_property_manager_fake_defaults",
+    ],
+    static_libs: [
+        "modem_android_property_manager",
+        "modem_android_property_manager_fake",
+        "modem_log_constants",
+        "modem_log_dumper",
+        "libgmock",
+    ],
+    vendor: true,
+    // Shared libs in vendor folder are guarded by SEPolicy, so tests need root
+    // access to run them.
+    require_root: true,
+}

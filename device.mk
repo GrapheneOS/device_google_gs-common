@@ -14,7 +14,9 @@
 # limitations under the License.
 #
 
+ifeq (,$(filter true, $(PRODUCT_WITHOUT_TTS_VOICE_PACKS)))
 include device/google/gs-common/tts/voice_packs.mk
+endif
 
 PRODUCT_SOONG_NAMESPACES += \
 	device/google/gs-common/powerstats

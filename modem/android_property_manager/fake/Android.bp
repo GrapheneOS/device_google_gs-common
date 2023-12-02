@@ -1,0 +1,23 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+// When `modem_android_property_manager_fake` is included statically, its
+// dependencies are not transitively included, so the target will also have to
+// include this default to restate them.
+cc_defaults {
+    name: "modem_android_property_manager_fake_defaults",
+    static_libs: [
+        "modem_android_property_manager",
+        "libbase",
+        "modem_log_constants",
+    ],
+}
+
+cc_library_static {
+    name: "modem_android_property_manager_fake",
+    export_include_dirs: [ "include" ],
+    srcs: [ "fake_android_property_manager.cpp" ],
+    defaults: [ "modem_android_property_manager_fake_defaults" ],
+    vendor_available: true,
+}

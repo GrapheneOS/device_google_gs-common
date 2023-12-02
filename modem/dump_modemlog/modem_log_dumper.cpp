@@ -2,11 +2,11 @@
 
 #include <log/log.h>
 
+#include "bugreport_constants.h"
 #include "dumper.h"
 #include "modem_log_constants.h"
 
-namespace modem {
-namespace logging {
+namespace pixel_modem::logging {
 
 void ModemLogDumper::DumpModemLogs() {
   bool shouldRestartModemLogging =
@@ -15,7 +15,11 @@ void ModemLogDumper::DumpModemLogs() {
       kModemLoggingNumberBugreportProperty.data(),
       kDefaultBugreportNumberFiles);
 
-  if (shouldRestartModemLogging) {
+  // Should always trigger `stopModemLogging`. This is because currently copying
+  // modem logs and stopping modem logging are entangled.
+  // TODO: b/289435256 - Always copy logs and return this to checking if logging
+  // is actively running.
+  if (allowedToStopModemLogging()) {
     // If modem logging is running at time of bugreport, it needs to be stopped
     // to ensure that the most recent logs are included in the bugreport. If
     // this command fails, only older log files will be included, as seen in
@@ -76,5 +80,5 @@ void ModemLogDumper::startModemLogging() {
   android_property_manager_.SetProperty(kModemLoggingEnabledProperty.data(),
                                         "true");
 }
-}  // namespace logging
-}  // namespace modem
+
+}  // namespace pixel_modem::logging
