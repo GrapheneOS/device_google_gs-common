@@ -37,6 +37,7 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Calibration tool for debug builds
 PRODUCT_PACKAGES_DEBUG += tarasque_test
+PRODUCT_PACKAGES_DEBUG += ProtoCalibGenerator
 
 endif  # vendor/google/camera check
 
