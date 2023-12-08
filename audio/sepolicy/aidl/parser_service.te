@@ -1,0 +1,14 @@
+# Define a parameter parser service
+type hal_audio_parameter_parser, coredomain, domain;
+type hal_audio_parameter_parser_exec, system_file_type, file_type, exec_type;
+init_daemon_domain(hal_audio_parameter_parser)
+
+# The server will serve a binder service.
+binder_service(hal_audio_parameter_parser)
+
+add_service(hal_audio_parameter_parser, hal_audio_parameter_parser_service);
+
+binder_call(audioserver, hal_audio_parameter_parser)
+binder_call(hal_audio_parameter_parser, servicemanager)
+
+allow audioserver hal_audio_parameter_parser_service:service_manager find;

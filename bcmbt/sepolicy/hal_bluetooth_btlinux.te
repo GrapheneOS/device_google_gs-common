@@ -1,4 +1,5 @@
 add_hwservice(hal_bluetooth_btlinux, hal_bluetooth_coexistence_hwservice);
+add_service(hal_bluetooth_btlinux, hal_bluetooth_coexistence_service);
 get_prop(hal_bluetooth_btlinux, boot_status_prop)
 
 allow hal_bluetooth_btlinux sysfs_bluetooth_writable:file rw_file_perms;

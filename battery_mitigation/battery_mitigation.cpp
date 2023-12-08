@@ -19,6 +19,8 @@
 #include <battery_mitigation/BatteryMitigation.h>
 #include <android/binder_process.h>
 
+#define COUNT_LIMIT 10
+
 using android::hardware::google::pixel::BatteryMitigation;
 using android::hardware::google::pixel::MitigationConfig;
 
@@ -94,7 +96,7 @@ int main(int /*argc*/, char ** /*argv*/) {
     bool isBatteryMitigationReady = false;
     std::string ready_str;
     int val = 0;
-    while (!isBatteryMitigationReady) {
+    for (int i = 0; i < COUNT_LIMIT; i++) {
         if (!android::base::ReadFileToString(kReadyFilePath, &ready_str)) {
             continue;
         }
@@ -104,9 +106,12 @@ int main(int /*argc*/, char ** /*argv*/) {
         }
         if (val == 1) {
             isBatteryMitigationReady = true;
+            break;
         }
     }
-    android::base::SetProperty(kReadyProperty, "1");
+    if (isBatteryMitigationReady) {
+        android::base::SetProperty(kReadyProperty, "1");
+    }
     while (true) {
         pause();
     }

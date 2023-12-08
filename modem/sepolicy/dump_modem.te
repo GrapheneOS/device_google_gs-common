@@ -8,3 +8,5 @@ allow dump_modem vendor_log_file:dir search;
 allow dump_modem vendor_rfsd_log_file:dir r_dir_perms;
 allow dump_modem vendor_rfsd_log_file:file r_file_perms;
 allow dump_modem vendor_toolbox_exec:file execute_no_trans;
+allow dump_modem sysfs_dump_modem:file r_file_perms;
+allow dump_modem logbuffer_device:chr_file r_file_perms;

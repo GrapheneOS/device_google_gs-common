@@ -1,0 +1,9 @@
+# Pixel PeristentBackgroundCameraServices
+user=system seinfo=platform name=com.google.pixel.camera.services domain=vendor_pbcs_app type=system_app_data_file levelFrom=all
+# The :* will allow all services, which run in their own processes, to use the same vendor_pbcs_app domain.
+user=system seinfo=platform name=com.google.pixel.camera.services:* domain=vendor_pbcs_app type=system_app_data_file levelFrom=all
+
+# Pixel Camera Services
+user=_app seinfo=CameraServices name=com.google.android.apps.camera.services domain=vendor_pcs_app type=app_data_file levelFrom=all
+# The :* will allow all services, which run in their own processes, to use the same vendor_pcs_app domain.
+user=_app seinfo=CameraServices name=com.google.android.apps.camera.services:* domain=vendor_pcs_app type=app_data_file levelFrom=all

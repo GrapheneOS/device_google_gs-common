@@ -1,0 +1,9 @@
+type vendor_camera_binder_service, hal_service_type, protected_service, service_manager_type;
+
+type hal_pixel_remote_camera_service, hal_service_type, protected_service, service_manager_type;
+
+type vendor_camera_lyricconfigprovider_service, hal_service_type, protected_service, service_manager_type;
+
+type vendor_camera_isp_service, hal_service_type, protected_service, service_manager_type;
+
+type vendor_camera_cameraidremapper_service, hal_service_type, protected_service, service_manager_type;

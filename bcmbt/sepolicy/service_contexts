@@ -1,0 +1,7 @@
+# Bluetooth HAL extension
+vendor.google.bluetooth_ext.IBTChannelAvoidance/default                      u:object_r:hal_bluetooth_coexistence_service:s0
+vendor.google.bluetooth_ext.IBluetoothSar/default                            u:object_r:hal_bluetooth_coexistence_service:s0
+vendor.google.bluetooth_ext.IBluetoothCcc/default                            u:object_r:hal_bluetooth_coexistence_service:s0
+vendor.google.bluetooth_ext.IBluetoothEwp/default                            u:object_r:hal_bluetooth_coexistence_service:s0
+vendor.google.bluetooth_ext.IBluetoothExt/default                            u:object_r:hal_bluetooth_coexistence_service:s0
+vendor.google.bluetooth_ext.IBluetoothFinder/default                         u:object_r:hal_bluetooth_coexistence_service:s0

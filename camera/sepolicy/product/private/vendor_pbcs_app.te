@@ -1,0 +1,9 @@
+typeattribute vendor_pbcs_app coredomain;
+
+app_domain(vendor_pbcs_app);
+
+dontaudit vendor_pbcs_app system_app_data_file:dir *;
+
+allow vendor_pbcs_app app_api_service:service_manager find;
+# Allow PBCS to find Camera Service.
+allow vendor_pbcs_app cameraserver_service:service_manager find;

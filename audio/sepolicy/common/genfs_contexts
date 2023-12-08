@@ -10,4 +10,11 @@ genfscon sysfs /devices/platform/audiometrics/codec_crashed_counter         u:ob
 genfscon sysfs /devices/platform/audiometrics/hwinfo_part_number            u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/ams_rate_read_once            u:object_r:sysfs_pixelstats:s0
 genfscon sysfs /devices/platform/audiometrics/cca_rate_read_once            u:object_r:sysfs_pixelstats:s0
-
+genfscon sysfs /devices/platform/audiometrics/cca_count_read_once           u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/pdm_state                     u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/waves                         u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/adapted_info_active_count     u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/adapted_info_active_duration  u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/pcm_count                     u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/pcm_latency                   u:object_r:sysfs_pixelstats:s0
+genfscon sysfs /devices/platform/audiometrics/call_count                    u:object_r:sysfs_pixelstats:s0

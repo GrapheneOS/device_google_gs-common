@@ -1,0 +1,21 @@
+# Allow PCS to find the LyricConfigProvider service through ServiceManager.
+allow vendor_pcs_app vendor_camera_lyricconfigprovider_service:service_manager find;
+# Allow PCS to find the CameraIdRemapper service through ServiceManager.
+allow vendor_pcs_app vendor_camera_cameraidremapper_service:service_manager find;
+
+allow vendor_pcs_app hal_pixel_remote_camera_service:service_manager add;
+
+binder_call(vendor_pcs_app, hal_pixel_remote_camera_service);
+
+binder_call(vendor_pcs_app, hal_camera_default);
+
+# Allow PCS to open socket connections for HTTP streaming support.
+allow vendor_pcs_app vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow vendor_pcs_app fwmarkd_socket:sock_file write;
+allow vendor_pcs_app port:tcp_socket name_connect;
+allow vendor_pcs_app port:udp_socket name_bind;
+allow vendor_pcs_app netd:unix_stream_socket connectto;
+allow vendor_pcs_app node:udp_socket node_bind;
+
+allow netd vendor_pcs_app:unpriv_socket_class_set create_socket_perms_no_ioctl;
+allow netd vendor_pcs_app:fd use;

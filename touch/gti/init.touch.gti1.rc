@@ -2,6 +2,8 @@ on property:vendor.device.modules.ready=1
     # Sysfs
     chown system system /sys/devices/virtual/goog_touch_interface/gti.1/force_active
     chown system system /sys/devices/virtual/goog_touch_interface/gti.1/fw_ver
+    chown system system /sys/devices/virtual/goog_touch_interface/gti.1/interactive_calibrate
+    chmod 666 /sys/devices/virtual/goog_touch_interface/gti.1/interactive_calibrate
     chown system system /sys/devices/virtual/goog_touch_interface/gti.1/panel_id
     chown system system /sys/devices/virtual/goog_touch_interface/gti.1/offload_id
     chown system system /sys/devices/virtual/goog_touch_interface/gti.1/ms_base
@@ -15,6 +17,7 @@ on property:vendor.device.modules.ready=1
     # Procfs
     chown system system /proc/goog_touch_interface
     chown system system /proc/goog_touch_interface/gti.1
+    chown system system /proc/goog_touch_interface/gti.1/dump
     chown system system /proc/goog_touch_interface/gti.1/ms_base
     chown system system /proc/goog_touch_interface/gti.1/ms_diff
     chown system system /proc/goog_touch_interface/gti.1/ms_raw

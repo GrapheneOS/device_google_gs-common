@@ -1,0 +1,2 @@
+genfscon sysfs /devices/platform/cpif/wakeup_events u:object_r:sysfs_dump_modem:s0
+genfscon sysfs /devices/platform/cpif/modem/pcie_event_stats u:object_r:sysfs_dump_modem:s0
