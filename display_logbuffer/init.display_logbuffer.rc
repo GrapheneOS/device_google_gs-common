@@ -1,0 +1,3 @@
+on property:ro.build.type=userdebug
+    chown system system /dev/logbuffer_dsim0
+    chown system system /dev/logbuffer_dsim1
