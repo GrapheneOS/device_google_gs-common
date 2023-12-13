@@ -1,0 +1,19 @@
+package {
+    default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_binary {
+    name: "dump_display_logbuffer",
+    srcs: ["dump_display_logbuffer.cpp"],
+    init_rc: ["init.display_logbuffer.rc"],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+    shared_libs: [
+        "libdump",
+    ],
+    vendor: true,
+    relative_install_path: "dump",
+}
