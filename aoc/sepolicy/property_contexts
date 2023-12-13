@@ -1,3 +1,4 @@
 # AoC
 vendor.aoc.firmware.version                     u:object_r:vendor_aoc_prop:s0
 persist.vendor.aoc.status_request_timed_out     u:object_r:vendor_timeout_aoc_prop:s0
+persist.vendor.radio.volte_mif_off              u:object_r:vendor_volte_mif_off:s0

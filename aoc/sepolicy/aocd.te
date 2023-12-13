@@ -21,3 +21,4 @@ allow aocd device:dir r_dir_perms;
 # set properties
 set_prop(aocd, vendor_aoc_prop)
 set_prop(aocd, vendor_timeout_aoc_prop)
+get_prop(aocd, vendor_volte_mif_off)
