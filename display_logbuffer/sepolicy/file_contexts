@@ -1,0 +1,4 @@
+/vendor/bin/dump/dump_display_logbuffer      u:object_r:dump_display_logbuffer_exec:s0
+
+/dev/logbuffer_dsim0                         u:object_r:display_log_device:s0
+/dev/logbuffer_dsim1                         u:object_r:display_log_device:s0
